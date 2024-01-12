@@ -15,6 +15,7 @@
 		833BBF812B5174EA00066668 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF802B5174EA00066668 /* LoginView.swift */; };
 		833BBF832B51750E00066668 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF822B51750E00066668 /* LoginViewModel.swift */; };
 		833BBF852B51754800066668 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF842B51754800066668 /* LoginVC.swift */; };
+		833BBF892B517C4400066668 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF882B517C4400066668 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		833BBF802B5174EA00066668 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		833BBF822B51750E00066668 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		833BBF842B51754800066668 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		833BBF882B517C4400066668 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		833BBF782B51705300066668 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				833BBF862B517C1F00066668 /* CustomComponents */,
 				833BBF752B516FFD00066668 /* Extensions */,
 			);
 			path = Helpers;
@@ -143,6 +146,22 @@
 			children = (
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		833BBF862B517C1F00066668 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				833BBF872B517C2700066668 /* TextField */,
+			);
+			path = CustomComponents;
+			sourceTree = "<group>";
+		};
+		833BBF872B517C2700066668 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				833BBF882B517C4400066668 /* CustomTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				833BBF892B517C4400066668 /* CustomTextField.swift in Sources */,
 				833BBF612B516FEF00066668 /* AppDelegate.swift in Sources */,
 				833BBF632B516FEF00066668 /* SceneDelegate.swift in Sources */,
 				833BBF852B51754800066668 /* LoginVC.swift in Sources */,

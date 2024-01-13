@@ -7,7 +7,16 @@
 
 import UIKit
 
+// MARK: - Login View Protocol
+protocol LoginViewProtocol: AnyObject {
+    func forgotPasswordTapped()
+    func loginTapped()
+    func googleLoginTapped()
+    func signUpTapped()
+}
+
 final class LoginView: UIView {
+    weak var delegate: LoginViewProtocol?
     
     //MARK: - Properties
     private lazy var loginImage: UIImageView = {
@@ -36,15 +45,25 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var emailTextField    = CustomTextField(fieldType: .email)
-    private lazy var passwordTextField = CustomTextField(fieldType: .password)
+    lazy var emailTextField    = CustomTextField(fieldType: .email)
+    lazy var passwordTextField = CustomTextField(fieldType: .password)
     
-    private let loginButton: UIButton = {
+    private lazy var forgotPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Forgot password?", for: UIControl.State.normal)
+        button.frame.size = .init(width: 200, height: 40)
+        button.contentHorizontalAlignment = .right
+        button.addTarget(self, action: #selector(didTapForgotPassword), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Login", for: UIControl.State.normal)
         button.frame.size = .init(width: 0, height: 40)
         button.layer.cornerRadius   = 5
         button.backgroundColor = .loginButtonBG
+        button.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
         return button
     }()
     
@@ -56,13 +75,36 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var loginViaWebButton: UIButton = {
+    private lazy var loginGoogleButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Login via Website", for: UIControl.State.normal)
+        button.setTitle("Login with Google", for: UIControl.State.normal)
         button.frame.size = .init(width: 0, height: 40)
         button.layer.cornerRadius   = 5
         button.backgroundColor = .loginButtonBG
+        button.addTarget(self, action: #selector(didTapGoogleLogin), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var signUpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Don't have an account?"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Sign Up.", for: UIControl.State.normal)
+        button.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var signUpHStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [signUpLabel,
+                                                       signUpButton])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        return stackView
     }()
     
     
@@ -75,13 +117,14 @@ final class LoginView: UIView {
         return label
     }()
     
-    lazy var loginVStack: UIStackView = {
+    private lazy var loginVStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [loginLabel,
                                                        emailTextField,
-                                                      passwordTextField,
-                                                      loginButton,
-                                                      orLabel,
-                                                      loginViaWebButton])
+                                                       passwordTextField,
+                                                       forgotPasswordButton,
+                                                       loginButton,
+                                                       orLabel,
+                                                       loginGoogleButton])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = 10
@@ -92,7 +135,10 @@ final class LoginView: UIView {
         // orLabel'ın üst ve altındaki spacing'i sıfır yapma
         stackView.setCustomSpacing(0, after: loginButton)
         stackView.setCustomSpacing(0, after: orLabel)
-      
+        
+        // loginWithGoogle'ın altındaki spacing'i sıfır yapma
+        stackView.setCustomSpacing(0, after: loginGoogleButton)
+        
         return stackView
     }()
     
@@ -118,6 +164,7 @@ final class LoginView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Layout Subviews
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -126,12 +173,13 @@ final class LoginView: UIView {
     
     // MARK: - UI Configuration
     private func configureUI() {
-        addSubviewsExt(loginImage, loginTitle, loginVStack, infoLabel)
+        addSubviewsExt(loginImage, loginTitle, loginVStack, signUpHStack, infoLabel)
         configureImage()
         configureLoginTitle()
         configureTextField()
         configureLoginVStack()
         configureInfoLabel()
+        configureSignUpHStack()
     }
     
     private func configureImage() {
@@ -169,12 +217,43 @@ final class LoginView: UIView {
         ])
     }
     
+    private func configureSignUpHStack() {
+        signUpHStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            signUpHStack.topAnchor.constraint(equalTo: loginVStack.bottomAnchor),
+            signUpHStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            signUpButton.widthAnchor.constraint(equalToConstant: 90)
+        ])
+    }
+    
     private func configureInfoLabel() {
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            infoLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            infoLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
+    
+  
+    
+    //MARK: - @Actions
+    @objc private func didTapForgotPassword() {
+        delegate?.forgotPasswordTapped()
+    }
+    
+    @objc private func didTapLogin() {
+        delegate?.loginTapped()
+    }
+    
+    @objc private func didTapGoogleLogin() {
+        delegate?.googleLoginTapped()
+    }
+    
+    @objc private func didTapSignUp() {
+        delegate?.signUpTapped()
+    }
 }
+

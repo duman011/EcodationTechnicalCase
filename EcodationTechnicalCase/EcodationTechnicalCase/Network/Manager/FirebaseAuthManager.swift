@@ -18,22 +18,20 @@ final class FirebaseAuthManager {
         }
     }
     
-    func register(userName: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
+    func register(email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error { onError(error) }
-            
             guard let result else { return }
-            
-            let ref = Firestore.firestore().collection("UsersInfo").document(result.user.uid)
-            
+            let ref = Firestore.firestore().collection("UsersInfo").document((result.user.uid))
             let data = [
-                "userName" : userName
+                "eMail" : email
             ] as! [String : Any]
             
             ApplicationVariables.currentUserID = result.user.uid
-            ref.setData(data) { error in
-                if let error { onError(error) }
+            FirestoreService.shared.setData(reference: ref, data: data) {
                 onSuccess()
+            } onError: { error in
+                onError(error)
             }
         }
     }

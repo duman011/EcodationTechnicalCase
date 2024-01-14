@@ -45,9 +45,9 @@ final class RegisterView: UIView {
         return label
     }()
     
-    private lazy var emailTextField      = CustomTextField(fieldType: .email)
-    private lazy var passwordTextField   = CustomTextField(fieldType: .password)
-    private lazy var rePasswordTextField = CustomTextField(fieldType: .password)
+     lazy var emailTextField      = CustomTextField(fieldType: .email)
+     lazy var passwordTextField   = CustomTextField(fieldType: .password)
+     lazy var rePasswordTextField = CustomTextField(fieldType: .password)
     
     private lazy var signUpButton: UIButton = {
         let button = UIButton()

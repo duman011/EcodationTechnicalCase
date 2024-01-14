@@ -42,20 +42,20 @@ extension LoginVC: LoginViewProtocol {
         
         guard let email = loginView.emailTextField.text,
               let password = loginView.passwordTextField.text else{
-            //presentAlert(title: "Alert!", message: "Email and Password ?", buttonTitle: "Ok")
+            presentAlert(title: "Alert!", message: "Email and Password ?", buttonTitle: "Ok")
             return
         }
         
         guard email.isValidEmail(email: email) else {
-           // presentAlert(title: "Alert!", message: "Email Invalid", buttonTitle: "Ok")
+            presentAlert(title: "Alert!", message: "Email Invalid", buttonTitle: "Ok")
             return
         }
 
         viewModel.login(email: email, password: password) { [weak self] in
             guard let self else { return }
-           // presentAlert(title: "Alert!", message: "Entry Successful 🥳", buttonTitle: "Ok")
-           // let mainTabBar = MainTabBarController()
-           // self.view.window?.rootViewController = mainTabBar
+            presentAlert(title: "Alert!", message: "Entry Successful 🥳", buttonTitle: "Ok")
+            let mainTabBar = MainTabBarController()
+            self.view.window?.rootViewController = mainTabBar
         }
     }
     
@@ -81,9 +81,9 @@ extension LoginVC: LoginViewProtocol {
                                                            accessToken: user.accessToken.tokenString)
             viewModel.signInGoogle(credential: credential,username: userName) {[weak self] in
                 guard let self else { return }
-                //presentAlert(title: "Alert!", message: "Registration Successful 🥳", buttonTitle: "Ok")
-                //let mainTabBar = MainTabBarController()
-                //self.view.window?.rootViewController = mainTabBar
+                presentAlert(title: "Alert!", message: "Registration Successful 🥳", buttonTitle: "Ok")
+                let mainTabBar = MainTabBarController()
+                self.view.window?.rootViewController = mainTabBar
             }
         }
     }

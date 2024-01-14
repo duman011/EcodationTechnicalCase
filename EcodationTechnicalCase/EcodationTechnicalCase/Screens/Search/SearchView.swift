@@ -11,6 +11,18 @@ import UIKit
 final class SearchView: UIView {
     
     //MARK: - Properties
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController()
+        return searchController
+    }()
+    
+    lazy var searchResultsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        return tableView
+    }()
+    
     
     //MARK: - Initializers
     override init(frame: CGRect) {
@@ -23,8 +35,17 @@ final class SearchView: UIView {
     }
     
     // MARK: - UI Configuration
+    
     private func configureUI() {
-        backgroundColor = .systemPink
+        backgroundColor = .secondarySystemBackground
+        configureResultsCollectionView()
     }
+    
+    private func configureResultsCollectionView() {
+        addSubview(resultsCollectionView)
+        resultsCollectionView.fillSuperview()
+        
+    }
+
     
 }

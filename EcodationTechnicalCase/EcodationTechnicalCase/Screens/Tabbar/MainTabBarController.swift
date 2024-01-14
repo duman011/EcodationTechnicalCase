@@ -35,8 +35,8 @@ final class MainTabBarController : UITabBarController {
         let searchVC = SearchVC()
         
         searchVC.tabBarItem = UITabBarItem(title: "Search",
-                                         image: UIImage(systemName: "house"),
-                                         selectedImage: UIImage(systemName: "house.fill"))
+                                         image: UIImage(systemName: "magnifyingglass"),
+                                         selectedImage: UIImage(systemName: "magnifyingglass"))
         
         return UINavigationController(rootViewController: searchVC)
     }
@@ -46,8 +46,8 @@ final class MainTabBarController : UITabBarController {
         let watchListVC = WatchListVC()
         
         watchListVC.tabBarItem = UITabBarItem(title: "WatchList",
-                                          image: UIImage(systemName: "magnifyingglass"),
-                                          selectedImage: UIImage(systemName: "magnifyingglass"))
+                                          image: UIImage(systemName: "list.star"),
+                                          selectedImage: UIImage(systemName: "list.star"))
         
         return UINavigationController(rootViewController: watchListVC)
     }
@@ -57,8 +57,8 @@ final class MainTabBarController : UITabBarController {
         let favoritesVC = FavoritesVC()
         
         favoritesVC.tabBarItem = UITabBarItem(title: "Favorites",
-                                         image: UIImage(systemName: "cart"),
-                                         selectedImage: UIImage(systemName: "cart.fill"))
+                                         image: UIImage(systemName: "suit.heart"),
+                                         selectedImage: UIImage(systemName: "suit.heart.fill"))
         
         return UINavigationController(rootViewController: favoritesVC)
     }

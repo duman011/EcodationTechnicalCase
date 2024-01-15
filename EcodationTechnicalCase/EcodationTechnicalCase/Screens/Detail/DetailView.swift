@@ -6,10 +6,16 @@
 //
 
 import UIKit
-
+// MARK: - Login View Protocol
+protocol DetailViewProtocol: AnyObject {
+    func watchListButtonTapped()
+    func favoritesButtonTapped()
+}
 final class DetailView: UIView {
     
     //MARK: - Properties
+    weak var delegate: DetailViewProtocol?
+    
     lazy var movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -20,6 +26,8 @@ final class DetailView: UIView {
     lazy var movieName: UILabel = {
         let label = UILabel()
         label.text = "movie Name"
+        label.font = UIFont.systemFont(ofSize: 22,weight: .bold)
+    
         return label
     }()
     
@@ -38,7 +46,7 @@ final class DetailView: UIView {
         let label = UILabel()
         label.text = "8.7"
         label.textColor = .label
-        label.font = UIFont.systemFont(ofSize: 25,weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18,weight: .bold)
         return label
     }()
     
@@ -80,11 +88,23 @@ final class DetailView: UIView {
         return image
     }()
     
-    lazy var movieOverview: UILabel = {
-        let label = UILabel()
-        label.text = "test movie overview.."
-        label.numberOfLines = 0
-        return label
+    lazy var movieOverview: UITextView = {
+        let textView = UITextView()
+        textView.text = "test movie overview.."
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.isEditable = false
+        textView.isSelectable = false
+        return textView
+    }()
+    
+    lazy var watchListButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "text.badge.minus"), style: UIBarButtonItem.Style.done, target: self, action: #selector(watchListButtonTapped))
+        return button
+    }()
+    
+    lazy var favoriteButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "suit.heart"), style: UIBarButtonItem.Style.done, target: self, action: #selector(favoritesButtonTapped))
+        return button
     }()
     
     //MARK: - Initializers
@@ -99,8 +119,12 @@ final class DetailView: UIView {
     
     //MARK: - UI Configuration
     private func configureUI() {
-        addSubviewsExt(movieImage)
+        addSubviewsExt(movieImage, movieName, dateStackView, movieOverview)
         configureMovieImage()
+        configureRatingStackView()
+        configureMovieName()
+        configureDateStackView()
+        configureMovieOverview()
     }
     
     private func configureMovieImage() {
@@ -112,6 +136,48 @@ final class DetailView: UIView {
             movieImage.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
+    
+    private func configureRatingStackView() {
+        movieImage.addSubview(ratingStackView)
+        ratingStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ratingStackView.bottomAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: -5),
+            ratingStackView.leadingAnchor.constraint(equalTo: movieImage.leadingAnchor, constant: 10)
+        ])
+    }
+    
+    private func configureMovieName() {
+        movieName.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            movieName.bottomAnchor.constraint(equalTo: ratingStackView.topAnchor, constant: -5),
+            movieName.leadingAnchor.constraint(equalTo: movieImage.leadingAnchor, constant: 10)
+        ])
+    }
  
-
+    private func configureDateStackView() {
+        dateStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dateStackView.bottomAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: -5),
+            dateStackView.trailingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: -10)
+        ])
+    }
+    
+    private func configureMovieOverview() {
+        movieOverview.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            movieOverview.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 10),
+            movieOverview.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            movieOverview.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            movieOverview.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    // MARK: - @Actions
+    @objc private func watchListButtonTapped() {
+        delegate?.watchListButtonTapped()
+    }
+    
+    @objc private func favoritesButtonTapped() {
+        delegate?.favoritesButtonTapped()
+    }
 }

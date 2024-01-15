@@ -11,7 +11,6 @@ import UIKit
 protocol RegisterViewProtocol: AnyObject {
     func signUpTapped()
     func loginTapped()
-
 }
 
 final class RegisterView: UIView {

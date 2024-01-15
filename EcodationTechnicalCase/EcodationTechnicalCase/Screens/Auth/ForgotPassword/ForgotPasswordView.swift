@@ -43,7 +43,7 @@ final class ForgotPasswordView: UIView {
         return label
     }()
     
-    private lazy var emailTextField = CustomTextField(fieldType: .email)
+    lazy var emailTextField = CustomTextField(fieldType: .email)
     
     private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton()

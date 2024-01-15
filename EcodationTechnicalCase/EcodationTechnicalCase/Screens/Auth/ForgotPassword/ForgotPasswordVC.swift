@@ -11,7 +11,7 @@ final class ForgotPasswordVC: UIViewController {
     
     //MARK: - Properties
     private let forgotPasswordView = ForgotPasswordView()
-    
+    private let viewModel = ForgotPasswordViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         forgotPasswordView.delegate = self
@@ -31,10 +31,29 @@ final class ForgotPasswordVC: UIViewController {
     
 }
 
-//MARK: - ForgotPasswordInterface
+//MARK: - ForgotPasswordViewInterface
 extension ForgotPasswordVC: ForgotPasswordViewProtocol {
     func forgotPasswordTapped() {
         
+        guard let email = forgotPasswordView.emailTextField.text else {
+            return
+        }
+        
+        guard email.isValidEmail(email: email) else {
+            presentAlert(title: "Alert!", message: "Invalide Email Address", buttonTitle: "Ok")
+            return
+        }
+        
+        viewModel.resetPassword(email: email) { [weak self] success, message in
+            guard let self else { return }
+
+            if success {
+                presentAlert(title: "Alert!", message: message, buttonTitle: "Ok")
+                navigationController?.popToRootViewController(animated: true)
+            } else {
+                presentAlert(title: "Alert!", message: message, buttonTitle: "Ok")
+            }
+        }
     }
     
     func loginTapped() {

@@ -8,7 +8,22 @@
 import FirebaseAuth
 import FirebaseFirestore
 
-final class FirebaseAuthManager {
+protocol FirebaseAuthManagerProtocol {
+    func signIn(email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func register(email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func signInWithCredential(credential: AuthCredential, username: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func signOut(onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void)
+    func resetPassword(email: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void)
+}
+
+
+
+final class FirebaseAuthManager: FirebaseAuthManagerProtocol {
+    static let shared = FirebaseAuthManager()
+    
+    private init() {}
+    
+    
     func signIn(email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error { onError(error) }

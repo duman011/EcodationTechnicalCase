@@ -8,7 +8,11 @@
 import Foundation
 
 final class RegisterViewModel {
-    lazy var firebaseAuthManager = FirebaseAuthManager()
+    private let  firebaseAuthManager: FirebaseAuthManagerProtocol
+    
+    init(firebaseAuthManager: FirebaseAuthManagerProtocol = FirebaseAuthManager.shared) {
+        self.firebaseAuthManager = firebaseAuthManager
+    }
     
     // MARK: - Register
     func register(email: String, password: String, completion: @escaping () -> Void) {

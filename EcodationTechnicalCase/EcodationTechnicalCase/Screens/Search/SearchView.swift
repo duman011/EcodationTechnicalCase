@@ -16,7 +16,7 @@ final class SearchView: UIView {
         return searchController
     }()
     
-    lazy var searchResultsTableView: UITableView = {
+    lazy var searchTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -42,10 +42,14 @@ final class SearchView: UIView {
     }
     
     private func configureResultsCollectionView() {
-        addSubview(resultsCollectionView)
-        resultsCollectionView.fillSuperview()
+        addSubview(searchTableView)
         
-    }
-
-    
+        searchTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            searchTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            searchTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
+    } 
 }

@@ -9,4 +9,8 @@ import Foundation
 
 final class SearchViewModel {
     
+    
+    func getSearchResults(searchText: String) {
+      
+    }
 }

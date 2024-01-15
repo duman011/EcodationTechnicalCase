@@ -42,6 +42,12 @@
 		833BBF832B51750E00066668 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF822B51750E00066668 /* LoginViewModel.swift */; };
 		833BBF852B51754800066668 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF842B51754800066668 /* LoginVC.swift */; };
 		833BBF892B517C4400066668 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF882B517C4400066668 /* CustomTextField.swift */; };
+		83FBC5DD2B5523760088C624 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DC2B5523760088C624 /* Movie.swift */; };
+		83FBC5E02B5524200088C624 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DF2B5524200088C624 /* APICaller.swift */; };
+		83FBC5E22B55245F0088C624 /* MovieError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E12B55245F0088C624 /* MovieError.swift */; };
+		83FBC5E42B5529910088C624 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E32B5529910088C624 /* DetailVC.swift */; };
+		83FBC5E72B5529C30088C624 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E62B5529C30088C624 /* DetailView.swift */; };
+		83FBC5E92B552E2D0088C624 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E82B552E2D0088C624 /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +84,12 @@
 		833BBF822B51750E00066668 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		833BBF842B51754800066668 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		833BBF882B517C4400066668 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		83FBC5DC2B5523760088C624 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		83FBC5DF2B5524200088C624 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		83FBC5E12B55245F0088C624 /* MovieError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieError.swift; sourceTree = "<group>"; };
+		83FBC5E32B5529910088C624 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		83FBC5E62B5529C30088C624 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		83FBC5E82B552E2D0088C624 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				833141F42B5286200057EBC1 /* FirebaseAuthManager.swift */,
-				8331423C2B545B7C0057EBC1 /* FirestoreService.swift */,
+				83FBC5DF2B5524200088C624 /* APICaller.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -204,6 +216,7 @@
 		833BBF742B516FF900066668 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				83FBC5DE2B5523FD0088C624 /* Service */,
 				833141F32B5286140057EBC1 /* Manager */,
 			);
 			path = Network;
@@ -215,6 +228,8 @@
 				833BBF7E2B51747800066668 /* UIView+Ext.swift */,
 				833142092B52A7130057EBC1 /* String+Ext.swift */,
 				833142192B52F71A0057EBC1 /* UIViewController+Ext.swift */,
+				83FBC5E12B55245F0088C624 /* MovieError.swift */,
+				83FBC5E82B552E2D0088C624 /* UIImageView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -222,6 +237,7 @@
 		833BBF762B51700A00066668 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				83FBC5DC2B5523760088C624 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +258,7 @@
 				833142272B52FCDC0057EBC1 /* Tabbar */,
 				833BBF7B2B5170E400066668 /* Auth */,
 				833142332B5306650057EBC1 /* Search */,
+				83FBC5E52B5529A70088C624 /* Detail */,
 				8331422E2B5301380057EBC1 /* WatchListVC.swift */,
 				833142302B5301C50057EBC1 /* FavoritesVC.swift */,
 			);
@@ -308,6 +325,23 @@
 				833BBF882B517C4400066668 /* CustomTextField.swift */,
 			);
 			path = TextField;
+			sourceTree = "<group>";
+		};
+		83FBC5DE2B5523FD0088C624 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8331423C2B545B7C0057EBC1 /* FirestoreService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		83FBC5E52B5529A70088C624 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				83FBC5E32B5529910088C624 /* DetailVC.swift */,
+				83FBC5E62B5529C30088C624 /* DetailView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,16 +438,22 @@
 				833BBF612B516FEF00066668 /* AppDelegate.swift in Sources */,
 				833BBF632B516FEF00066668 /* SceneDelegate.swift in Sources */,
 				833BBF852B51754800066668 /* LoginVC.swift in Sources */,
+				83FBC5E22B55245F0088C624 /* MovieError.swift in Sources */,
+				83FBC5E02B5524200088C624 /* APICaller.swift in Sources */,
 				833BBF812B5174EA00066668 /* LoginView.swift in Sources */,
+				83FBC5E72B5529C30088C624 /* DetailView.swift in Sources */,
 				833141E92B5277230057EBC1 /* RegisterView.swift in Sources */,
 				833142262B52F8D80057EBC1 /* CustomButton.swift in Sources */,
 				8331422D2B52FFCE0057EBC1 /* SearchVC.swift in Sources */,
 				8331421C2B52F73D0057EBC1 /* AlertVC.swift in Sources */,
 				833141EB2B52773A0057EBC1 /* RegisterVC.swift in Sources */,
+				83FBC5E42B5529910088C624 /* DetailVC.swift in Sources */,
 				833141F52B5286200057EBC1 /* FirebaseAuthManager.swift in Sources */,
 				833BBF832B51750E00066668 /* LoginViewModel.swift in Sources */,
 				8331423D2B545B7C0057EBC1 /* FirestoreService.swift in Sources */,
+				83FBC5E92B552E2D0088C624 /* UIImageView+Ext.swift in Sources */,
 				833142212B52F85E0057EBC1 /* TitleLabel.swift in Sources */,
+				83FBC5DD2B5523760088C624 /* Movie.swift in Sources */,
 				8331421E2B52F78E0057EBC1 /* AlertContainerView.swift in Sources */,
 				8331421A2B52F71A0057EBC1 /* UIViewController+Ext.swift in Sources */,
 				833142372B5307770057EBC1 /* SearchViewModel.swift in Sources */,

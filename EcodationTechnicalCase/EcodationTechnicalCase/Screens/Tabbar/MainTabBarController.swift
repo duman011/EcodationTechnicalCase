@@ -25,7 +25,7 @@ final class MainTabBarController : UITabBarController {
 
         viewControllers = [
             createSearchNC(),
-            createSearchNC(),
+            createWatchListNC(),
             FavoritesNC()
         ]
     }

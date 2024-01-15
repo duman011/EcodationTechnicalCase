@@ -19,9 +19,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // MARK: - kullanıcı sürekli giriş yapmamsı için yapılan işlem kullanıcıyı hatırlama işlemi
         if ApplicationVariables.currentUserID != nil {
-            let TabBar = MainTabBarController()
-            TabBar.modalPresentationStyle = .fullScreen
-            window?.rootViewController = TabBar
+            let tabBar = MainTabBarController()
+            tabBar.modalPresentationStyle = .fullScreen 
+            window?.rootViewController = tabBar
         }else {
             let vc = UINavigationController(rootViewController: LoginVC())
             window?.rootViewController = vc

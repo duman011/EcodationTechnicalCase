@@ -14,6 +14,7 @@ final class DetailVC: UIViewController {
     private let detailView = DetailView()
     var movies: Movie? = nil
     private lazy var isFavorited = false
+    private lazy var isWatchList = false
     
     
     //MARK: - Initializers
@@ -73,32 +74,46 @@ final class DetailVC: UIViewController {
     }
     
     private func configureFavoriteButton() {
-        viewModel.isFavorited(movies: movies!) { bool in
+        // MARK: - isFavorite Button Configure
+        viewModel.isFavorited(movie: movies!) { bool in
              self.isFavorited = bool
             self.detailView.favoriteButton.image = UIImage(systemName: bool ? "suit.heart.fill" : "suit.heart")
          }
+        // MARK: - isWatchList Button Configure
+        viewModel.isWatchList(movie: movies!) { bool in
+            self.isWatchList = bool
+            self.detailView.watchListButton.image = UIImage(systemName: bool ? "text.badge.plus" : "text.badge.minus")
+        }
      }
     
 }
 
 extension DetailVC: DetailViewProtocol {
     func watchListButtonTapped() {
-        
+        if isWatchList {
+            viewModel.removeFromWatchList(movie: movies!) { bool in
+                self.isFavorited = bool
+                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.minus")
+            }
+        } else {
+            viewModel.addToWatchList(movie: movies!) { bool in
+                self.isWatchList = bool
+                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.plus")
+            }
+        }
     }
     
     func favoritesButtonTapped() {
         if isFavorited {
-            viewModel.removeFromFavorites(movies: movies!) { bool in
+            viewModel.removeFromFavorites(movie: movies!) { bool in
                 self.isFavorited = bool
                 self.detailView.favoriteButton.image = UIImage(systemName: "suit.heart")
             }
         } else {
-            viewModel.addToFavorites(movies: movies!) { bool in
+            viewModel.addToFavorites(movie: movies!) { bool in
                 self.isFavorited = bool
                 self.detailView.favoriteButton.image = UIImage(systemName: "suit.heart.fill")
             }
         }
     }
-    
-    
 }

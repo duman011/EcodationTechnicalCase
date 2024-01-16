@@ -49,6 +49,10 @@
 		8395B0ED2B55EA1400BD3308 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0EC2B55EA1400BD3308 /* FavoritesView.swift */; };
 		8395B0F02B55EA5E00BD3308 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0EF2B55EA5E00BD3308 /* FavoritesViewModel.swift */; };
 		8395B0F32B55EB3B00BD3308 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0F22B55EB3B00BD3308 /* MovieTableViewCell.swift */; };
+		8395B0F52B55FCA700BD3308 /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0F42B55FCA700BD3308 /* WatchListView.swift */; };
+		8395B0F82B55FCD800BD3308 /* WatchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0F72B55FCD800BD3308 /* WatchListViewModel.swift */; };
+		8395B0FA2B56A20300BD3308 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0F92B56A20300BD3308 /* FirestoreManager.swift */; };
+		8395B0FC2B56D18E00BD3308 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0FB2B56D18E00BD3308 /* Reachability.swift */; };
 		83FBC5DD2B5523760088C624 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DC2B5523760088C624 /* Movie.swift */; };
 		83FBC5E02B5524200088C624 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DF2B5524200088C624 /* NetworkService.swift */; };
 		83FBC5E22B55245F0088C624 /* MovieError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E12B55245F0088C624 /* MovieError.swift */; };
@@ -99,6 +103,10 @@
 		8395B0EC2B55EA1400BD3308 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		8395B0EF2B55EA5E00BD3308 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		8395B0F22B55EB3B00BD3308 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		8395B0F42B55FCA700BD3308 /* WatchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
+		8395B0F72B55FCD800BD3308 /* WatchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListViewModel.swift; sourceTree = "<group>"; };
+		8395B0F92B56A20300BD3308 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		8395B0FB2B56D18E00BD3308 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		83FBC5DC2B5523760088C624 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		83FBC5DF2B5524200088C624 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		83FBC5E12B55245F0088C624 /* MovieError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieError.swift; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				833141F42B5286200057EBC1 /* FirebaseAuthManager.swift */,
+				8395B0F92B56A20300BD3308 /* FirestoreManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -153,6 +162,7 @@
 			children = (
 				833142072B52875D0057EBC1 /* ApplicationVariables.swift */,
 				8395B0DC2B55BEF200BD3308 /* WorkItem.swift */,
+				8395B0FB2B56D18E00BD3308 /* Reachability.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -358,6 +368,8 @@
 			isa = PBXGroup;
 			children = (
 				8331422E2B5301380057EBC1 /* WatchListVC.swift */,
+				8395B0F42B55FCA700BD3308 /* WatchListView.swift */,
+				8395B0F72B55FCD800BD3308 /* WatchListViewModel.swift */,
 			);
 			path = WatchList;
 			sourceTree = "<group>";
@@ -484,8 +496,10 @@
 				8331422F2B5301390057EBC1 /* WatchListVC.swift in Sources */,
 				833BBF892B517C4400066668 /* CustomTextField.swift in Sources */,
 				8395B0F32B55EB3B00BD3308 /* MovieTableViewCell.swift in Sources */,
+				8395B0F52B55FCA700BD3308 /* WatchListView.swift in Sources */,
 				833141F02B527CA10057EBC1 /* ForgotPasswordView.swift in Sources */,
 				833142292B52FCEC0057EBC1 /* MainTabBarController.swift in Sources */,
+				8395B0F82B55FCD800BD3308 /* WatchListViewModel.swift in Sources */,
 				833142082B52875D0057EBC1 /* ApplicationVariables.swift in Sources */,
 				833142312B5301C50057EBC1 /* FavoritesVC.swift in Sources */,
 				8331420A2B52A7130057EBC1 /* String+Ext.swift in Sources */,
@@ -495,6 +509,7 @@
 				833141ED2B52774F0057EBC1 /* RegisterViewModel.swift in Sources */,
 				833BBF612B516FEF00066668 /* AppDelegate.swift in Sources */,
 				833BBF632B516FEF00066668 /* SceneDelegate.swift in Sources */,
+				8395B0FA2B56A20300BD3308 /* FirestoreManager.swift in Sources */,
 				833BBF852B51754800066668 /* LoginVC.swift in Sources */,
 				83FBC5E22B55245F0088C624 /* MovieError.swift in Sources */,
 				8395B0F02B55EA5E00BD3308 /* FavoritesViewModel.swift in Sources */,
@@ -521,6 +536,7 @@
 				8331421E2B52F78E0057EBC1 /* AlertContainerView.swift in Sources */,
 				8331421A2B52F71A0057EBC1 /* UIViewController+Ext.swift in Sources */,
 				833142372B5307770057EBC1 /* SearchViewModel.swift in Sources */,
+				8395B0FC2B56D18E00BD3308 /* Reachability.swift in Sources */,
 				833142232B52F8760057EBC1 /* SecondaryTitleLabel.swift in Sources */,
 				833BBF7F2B51747800066668 /* UIView+Ext.swift in Sources */,
 			);

@@ -17,16 +17,18 @@ final class FavoritesVC: UIViewController {
 
     //MARK: - Properties
     private let favoriteView = FavoritesView()
-    private lazy var viewModel: FavoritesViewModel? = FavoritesViewModel(view: self)
-    
+    private lazy var viewModel = FavoritesViewModel(view: self)
+    private lazy var emptyView = EmptyListView(image:  UIImage(systemName: "popcorn.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
+                                               title: "Your favorite movies list is currently empty")
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.viewDidLoad()
+        viewModel.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel?.refreshUI()
+        super.viewWillAppear(animated)
+        viewModel.refreshUI()
     }
 
     override func loadView() {
@@ -35,6 +37,11 @@ final class FavoritesVC: UIViewController {
     }
 
     // MARK: - UI Configuration
+    private func configureNavbar() {
+        navigationItem.title = "Favorites List"
+        view.backgroundColor = .secondarySystemBackground
+    }
+    
     private func configureTableView(){
         favoriteView.tableView.delegate = self
         favoriteView.tableView.dataSource = self
@@ -46,7 +53,13 @@ final class FavoritesVC: UIViewController {
 // MARK: - UITableViewDelegate & UITableViewDataSource
 extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfRowsInSection() ?? 0
+        if viewModel.numberOfRowsInSection() == 0 {
+            tableView.backgroundView = emptyView
+        } else {
+            tableView.backgroundView = UIView()
+        }
+        
+        return viewModel.numberOfRowsInSection()
     }
     
     
@@ -55,17 +68,15 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
             return UITableViewCell()
         }
         
-        if let movie = viewModel?.cellForRow(at: indexPath) {
-            cell.configure(with: movie)
-        }
-   
+        let movie = viewModel.cellForRow(at: indexPath)
+        cell.configure(with: movie)
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel?.didSelectRowAt(at: indexPath)
+        viewModel.didSelectRowAt(at: indexPath)
     }
     
     
@@ -73,9 +84,10 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
         return 150
     }
     
+    // MARK: - Delete Swipe Action
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Sil") { contextualAction, view, boolValue in
-            self.viewModel?.deleteSwipeAction(at: indexPath)
+            self.viewModel.deleteSwipeAction(at: indexPath)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -84,7 +96,6 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
 
 // MARK: - FavoritesVCInterface
 extension FavoritesVC: FavoritesVCInterface{
-    
     func pushVC(vc: UIViewController) {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(vc, animated: true)
@@ -96,8 +107,7 @@ extension FavoritesVC: FavoritesVCInterface{
     }
     
     func configureViewDidLoad() {
-        navigationController?.navigationBar.tintColor = UIColor.red
-        view.backgroundColor = .secondarySystemBackground
+        configureNavbar()
         configureTableView()
     }
 }

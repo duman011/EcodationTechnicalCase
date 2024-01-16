@@ -50,7 +50,8 @@ extension LoginVC: LoginViewProtocol {
             presentAlert(title: "Alert!", message: "Email Invalid", buttonTitle: "Ok")
             return
         }
-
+            
+        /// Validation kontrolü yapıldıktan sonra isteninlen forma uygunsa login yapılacak
         viewModel.login(email: email, password: password) { [weak self] in
             guard let self else { return }
             presentAlert(title: "Alert!", message: "Entry Successful 🥳", buttonTitle: "Ok")

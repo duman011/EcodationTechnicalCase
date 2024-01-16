@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SearchViewProtocol: AnyObject {
+    func logoutButtonTapped()
+}
+
 final class SearchView: UIView {
     
     //MARK: - Properties
+    weak var delegate: SearchViewProtocol?
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController()
         return searchController
@@ -23,6 +29,11 @@ final class SearchView: UIView {
         return tableView
     }()
     
+    lazy var logoutButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "power.dotted"), style: UIBarButtonItem.Style.done, target: self, action: #selector(logoutButtonTapped))
+        return button
+    }()
+   
     
     //MARK: - Initializers
     override init(frame: CGRect) {
@@ -35,7 +46,6 @@ final class SearchView: UIView {
     }
     
     // MARK: - UI Configuration
-    
     private func configureUI() {
         backgroundColor = .secondarySystemBackground
         configureResultsCollectionView()
@@ -51,5 +61,10 @@ final class SearchView: UIView {
             searchTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             searchTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
-    } 
+    }
+    
+    // MARK: - @Actions
+    @objc private func logoutButtonTapped() {
+        delegate?.logoutButtonTapped()
+    }
 }

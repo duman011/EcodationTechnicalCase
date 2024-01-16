@@ -12,13 +12,13 @@ final class EmptyListView: UIView {
     //MARK: - Properties
    private lazy var emptyImage: UIImageView = {
         let imageView = UIImageView()
-       imageView.image = UIImage(systemName: "movieclapper")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130))
+       
         return imageView
     }()
     
     private lazy var emptyTitle: UILabel = {
         let label = UILabel()
-        label.text = "No movies found for the given search text."
+    
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -28,8 +28,10 @@ final class EmptyListView: UIView {
     }()
     
     //MARK: - Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(image: UIImage?, title: String?) {
+        super.init(frame: .zero)
+        self.emptyImage.image = image
+        self.emptyTitle.text = title
         configureUI()
     }
     
@@ -37,8 +39,11 @@ final class EmptyListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+ 
+    
     // MARK: - UI Configuration
     private func configureUI() {
+        backgroundColor = .secondarySystemBackground
         addSubviewsExt(emptyImage, emptyTitle)
         configureEmptyImage()
         configureEmptyTitle()

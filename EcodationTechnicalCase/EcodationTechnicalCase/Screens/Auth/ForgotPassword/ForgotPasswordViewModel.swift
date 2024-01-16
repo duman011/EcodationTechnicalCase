@@ -8,9 +8,10 @@
 import Foundation
 
 final class ForgotPasswordViewModel {
-    
+    //MARK: - Properties
     private let  firebaseAuthManager: FirebaseAuthManagerProtocol
     
+    //MARK: - Initializers
     init(firebaseAuthManager: FirebaseAuthManagerProtocol = FirebaseAuthManager.shared) {
         self.firebaseAuthManager = firebaseAuthManager
     }

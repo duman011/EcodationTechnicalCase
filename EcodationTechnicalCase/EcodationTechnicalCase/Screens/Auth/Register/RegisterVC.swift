@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 final class RegisterVC: UIViewController {
 
     //MARK: - Properties
@@ -74,7 +75,7 @@ extension RegisterVC : RegisterViewProtocol {
                 presentAlert(title: "Alert!", message: "Password must contain at least 1 uppercase character", buttonTitle: "Ok")
                 return
             }
-            // TODO: - bu çalışmıyor bunu kontrol et !!!
+         
             guard password == rePassword else {
                 presentAlert(title: "Alert!", message: "Password and password repeat are not the same", buttonTitle: "Ok")
                 return
@@ -82,7 +83,7 @@ extension RegisterVC : RegisterViewProtocol {
     
         return
         
-         
+        /// Validation kontrolü yapıldıktan sonra isteninlen forma uygunsa kayıt yapılacak
          viewModel.register(email: email,
                           password: password) { [weak self] in
              guard let self else { return }
@@ -95,7 +96,4 @@ extension RegisterVC : RegisterViewProtocol {
     func loginTapped() {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
-    
-    
 }

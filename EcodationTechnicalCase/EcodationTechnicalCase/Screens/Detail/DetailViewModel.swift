@@ -9,69 +9,79 @@
 import FirebaseFirestore
 import FirebaseAuth
 
-final class DetailViewModel {
-    let currentUserID = Auth.auth().currentUser!.uid
+protocol DetailVMInterface {
+    func addToFavorites(movie: Movie, completion: @escaping (Bool) -> Void)
+    func removeFromFavorites(movie: Movie, completion: @escaping (Bool) -> Void)
+    func isFavorited(movie: Movie, completion: @escaping (Bool) -> Void)
+}
+
+final class DetailViewModel: DetailVMInterface {
+    private let firestoreManager: FirestoreManagerInterface
     
-    func addToFavorites(movies: Movie, completion: @escaping (Bool) -> Void) {
-        let data: [String: Any] = [
-               "id": movies.id,
-               "original_title": movies.original_title ?? "",
-               "original_name": movies.original_name ?? "",
-               "overview": movies.overview ?? "",
-               "poster_path": movies.poster_path ?? "",
-               "media_type": movies.media_type ?? "",
-               "release_date": movies.release_date ?? "",
-               "first_air_date": movies.first_air_date ?? "",
-               "vote_average": movies.vote_average ?? 0.0,
-               "vote_count": movies.vote_count ?? 0
-           ]as [String : Any]
-        
-        Firestore.firestore()
-            .collection("UsersInfo")
-            .document(currentUserID)
-            .collection("favorites")
-            .document(String(movies.id))
-            .setData(data) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                self.isFavorited(movies: movies) { bool in
-                    completion(bool)
-                }
-            }
+    //MARK: - Initializers
+    init(firestoreManager: FirestoreManagerInterface = FirestoreManager.shared) {
+        self.firestoreManager = firestoreManager
     }
     
-    func removeFromFavorites(movies: Movie, completion: @escaping (Bool) -> Void) {
-        Firestore.firestore()
-            .collection("UsersInfo")
-            .document(currentUserID)
-            .collection("favorites")
-            .document(String(movies.id))
-            .delete { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                self.isFavorited(movies: movies) { bool in
-                    completion(bool)
-                }
+    //MARK: - Favorites Functions
+    func addToFavorites(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.addMovieToFavorite(movie: movie) {[weak self] in
+            guard let self else { return }
+            isFavorited(movie: movie) { bool in
+                completion(bool)
             }
+        } onError: { error in
+            print(error)
+        }
     }
     
-    func isFavorited(movies: Movie, completion: @escaping (Bool) -> Void) {
-        Firestore.firestore()
-            .collection("UsersInfo")
-            .document(currentUserID)
-            .collection("favorites")
-            .document(String(movies.id))
-            .getDocument { snapshot, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot {
-                    completion(snapshot.exists)
-                }
+    func removeFromFavorites(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.removeFromFavorites(movie: movie) {[weak self] in
+            guard let self else { return }
+            isFavorited(movie: movie) { bool in
+                completion(bool)
             }
+        } onError: { error in
+            print(error)
+        }
+    }
+    
+    func isFavorited(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.isFavorited(movie: movie) { exists in
+            completion(exists)
+        } onError: { error in
+            print(error)
+        }
+    }
+    
+    //MARK: - WatchList Functions
+    func addToWatchList(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.addMovieToWatchList(movie: movie) {[weak self] in
+            guard let self else { return }
+            isFavorited(movie: movie) { bool in
+                completion(bool)
+            }
+        } onError: { error in
+            print(error)
+        }
+    }
+    
+    func removeFromWatchList(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.removeFromWatchList(movie: movie) {[weak self] in
+            guard let self else { return }
+            isFavorited(movie: movie) { bool in
+                completion(bool)
+            }
+        } onError: { error in
+            print(error)
+        }
+    }
+    
+    func isWatchList(movie: Movie, completion: @escaping (Bool) -> Void) {
+        firestoreManager.isWatchList(movie: movie) { exists in
+            completion(exists)
+        } onError: { error in
+            print(error)
+        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FavoritesViewModel.swift
+//  WatchListViewModel.swift
 //  EcodationTechnicalCase
 //
 //  Created by Yaşar Duman on 16.01.2024.
@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import FirebaseAuth
 
-protocol FavoritesVMInterface {
+protocol WatchListVMInterface {
     func viewDidLoad()
     func refreshUI()
     func numberOfRowsInSection() -> Int
@@ -18,15 +18,14 @@ protocol FavoritesVMInterface {
 }
 
 
-final class FavoritesViewModel {
+final class WatchListViewModel {
     //MARK: - Properties
-    private weak var view: FavoritesVCInterface?
+    private weak var view: WatchListVCInterface?
     private let firestoreManager: FirestoreManagerInterface
-    private let currentUserID = Auth.auth().currentUser!.uid
     private var movies: [Movie] = []
     
     //MARK: - Initializers
-    init(view: FavoritesVCInterface? = nil,
+    init(view: WatchListVCInterface? = nil,
          firestoreManager: FirestoreManagerInterface = FirestoreManager.shared) {
         self.view = view
         self.firestoreManager = firestoreManager
@@ -35,7 +34,7 @@ final class FavoritesViewModel {
     func fetchFavorites(completion: @escaping([Movie]) -> Void) {
         firestoreManager.getMoviesFromFavorites {[weak self]
             favoriteMovies in
-            guard self != nil else { return }
+            guard let self else { return }
             
             completion(favoriteMovies)
         } onError: { error in
@@ -43,20 +42,19 @@ final class FavoritesViewModel {
         }
     }
     
-    
     func removeFromFavorites(movies: Movie) {
-        firestoreManager.removeFromFavorites(movie: movies) {[weak self] in
-            guard self != nil else { return }
-            
-         print("favorilerden çıkartılıyor...")
-        } onError: { error in
-            print(error)
-        }
+            firestoreManager.removeFromFavorites(movie: movies) {[weak self] in
+                guard let self else { return }
+                
+             print("favorilerden çıkartılıyor...")
+            } onError: { error in
+                print(error)
+            }
     }
 }
 
-// MARK: - FavoritesVMInterface
-extension FavoritesViewModel: FavoritesVMInterface{
+// MARK: - WatchListVMInterface
+extension WatchListViewModel: WatchListVMInterface{
     func numberOfRowsInSection() -> Int {
         return movies.count
     }

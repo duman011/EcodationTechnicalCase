@@ -1,5 +1,5 @@
 //
-//  FavoritesView.swift
+//  WatchListView.swift
 //  EcodationTechnicalCase
 //
 //  Created by Yaşar Duman on 16.01.2024.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-final class FavoritesView: UIView {
-    
+final class WatchListView: UIView {
     //MARK: - Properties
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -30,6 +29,7 @@ final class FavoritesView: UIView {
     // MARK: - UI Configuration
     private func configureUI() {
         backgroundColor = .secondarySystemBackground
+        
         configureFavoriteTableView()
     }
     

@@ -14,17 +14,19 @@ protocol SearcVCInterface: AnyObject {
 }
 
 final class SearchVC: UIViewController {
-
+    
     //MARK: - Properties
     private lazy var viewModel = SearchViewModel(view: self)
     private let searchView = SearchView()
-    private let emptyView = EmptyListView()
-  
+    private let emptyView = EmptyListView(image:  UIImage(systemName: "movieclapper")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
+                                          title: "No movies found for the given search text.")
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
+        searchView.delegate = self
+        checkNetworkConnection()
     }
     
     // MARK: - Load View
@@ -33,12 +35,22 @@ final class SearchVC: UIViewController {
         view = searchView
     }
     
+    /// Internet baglantisi olmadigi durumlarda bir alert cikarir.
+    private func checkNetworkConnection() {
+        if Reachability.isNetworkAvailable() {
+            viewModel.viewDidLoad()
+        } else {
+            self.presentAlert(title: "Hata", message: "Lütfen internet bağlantınızı kontrol ediniz.", buttonTitle: "OK")
+        }
+    }
+    
     // MARK: - UI Configuration
+    /// Arayuzdeki degisiklikleri ayarlar.
     private func prepareSearchTableView() {
         searchView.searchTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         searchView.searchTableView.dataSource = self
         searchView.searchTableView.delegate = self
-     }
+    }
     
     private func configureNavigationBar() {
         navigationItem.title = "Movie Search"
@@ -46,8 +58,9 @@ final class SearchVC: UIViewController {
         navigationItem.searchController = searchView.searchController
         
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        navigationItem.rightBarButtonItems = [searchView.logoutButton]
     }
-    
 }
 
 // MARK: - UISearchResultsUpdating
@@ -61,26 +74,27 @@ extension SearchVC: UISearchResultsUpdating {
 
 // MARK: - UITableViewDataSource && UITableViewDelegate
 extension SearchVC: UITableViewDataSource , UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {        
         if viewModel.movies.count == 0 {
             tableView.backgroundView = emptyView
+        }else {
+            tableView.backgroundView = UIView()
         }
-        
+
         return viewModel.movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-         // Kontrol ekleyerek index out of range hatasını önle
-         guard indexPath.row < viewModel.movies.count  else {
-             return cell
-         }
-
+        
+        // Kontrol ekleyerek index out of range hatasını önle
+        guard indexPath.row < viewModel.movies.count  else {
+            return cell
+        }
+        
         let movie = viewModel.movies[indexPath.row]
-         cell.textLabel?.text = movie.original_title
-         return cell
+        cell.textLabel?.text = movie.original_title
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -88,7 +102,7 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
         viewModel.movieDidSelectItem(at: indexPath)
     }
 }
-    
+
 // MARK: - SearcVCInterface
 extension SearchVC: SearcVCInterface {
     func configureViewDidload() {
@@ -105,7 +119,16 @@ extension SearchVC: SearcVCInterface {
     func pushVC(vc: UIViewController) {
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
 
+
+// MARK: - SearchViewProtocol
+extension SearchVC: SearchViewProtocol{
+    func logoutButtonTapped() {
+        viewModel.logout{
+            let loginVC = LoginVC()
+            let nav = UINavigationController(rootViewController: loginVC)
+            self.view.window?.rootViewController = nav
+        }
+    }
+}

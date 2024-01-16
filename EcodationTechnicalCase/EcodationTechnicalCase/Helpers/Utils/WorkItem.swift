@@ -7,20 +7,27 @@
 
 import Foundation
 
-///  SearchBar'ın textDidChange methodunu her harf girişinde değil de, kullanıcı yazmayı bıraktığında tetiklemek için kullandığımız class.
+
+/// Kullanıcı yazmayı bıraktığında SearchBar'ın textDidChange methodunu tetiklemek için kullanılan sınıf.
 final class WorkItem {
     
     private var pendingRequestWorkItem: DispatchWorkItem?
     
+    /// İstenilen süre sonunda bloğu çalıştırmak için kullanılan fonksiyon.
+    /// - Parameters:
+    ///   - after: Çalıştırılacak işlemden önce beklenmesi gereken süre.
+    ///   - block: Çalıştırılacak işlem.
     func perform(after: TimeInterval, _ block: @escaping () -> Void) {
-        // Cancel the currently pending item
+        // Mevcut işlemi iptal et
         pendingRequestWorkItem?.cancel()
         
-        // Wrap our request in a work item
+        // İsteğimizi bir iş öğesi içine alın
         let requestWorkItem = DispatchWorkItem(block: block)
         
         pendingRequestWorkItem = requestWorkItem
         
+        // Belirtilen süre sonunda ana kuyruk üzerinde çalıştır
         DispatchQueue.main.asyncAfter(deadline: .now() + after, execute: requestWorkItem)
     }
+
 }

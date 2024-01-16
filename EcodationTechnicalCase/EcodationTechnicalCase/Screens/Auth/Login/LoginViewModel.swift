@@ -8,8 +8,10 @@
 import FirebaseAuth
 
 final class LoginViewModel {
+    //MARK: - Lifecycle
     private let  firebaseAuthManager: FirebaseAuthManagerProtocol
     
+    //MARK: - Initializers
     init(firebaseAuthManager: FirebaseAuthManagerProtocol = FirebaseAuthManager.shared) {
         self.firebaseAuthManager = firebaseAuthManager
     }
@@ -23,8 +25,8 @@ final class LoginViewModel {
         }
     }
     
-    func signInGoogle(credential: AuthCredential, username: String, completion: @escaping () -> Void) {
-        firebaseAuthManager.signInWithCredential(credential: credential, username: username) {
+    func signInGoogle(credential: AuthCredential, email: String, completion: @escaping () -> Void) {
+        firebaseAuthManager.signInWithCredential(credential: credential, email: email) {
             completion()
         } onError: { error in
             print(error)

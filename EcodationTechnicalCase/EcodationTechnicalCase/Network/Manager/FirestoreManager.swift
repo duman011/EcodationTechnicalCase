@@ -14,13 +14,12 @@ protocol FirestoreManagerInterface {
     func addMovieToFavorite(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void)
     func removeFromFavorites(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void)
     func isFavorited (movie: Movie, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void)
+    func getMoviesFromFavorites(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void)
+    
     func addMovieToWatchList(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void)
     func removeFromWatchList(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void)
     func isWatchList (movie: Movie, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void)
-    func getMoviesFromFavorites(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void)
-    
-    
-    
+    func getMoviesFromWatchList(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void)
 }
 
 final class FirestoreManager: FirestoreManagerInterface {
@@ -31,9 +30,15 @@ final class FirestoreManager: FirestoreManagerInterface {
     //MARK: - Initializers
     private init() {}
     
+    
     //MARK: - Favorites Functions
+    
+    /// Favorilere film eklemeyi sağlayan fonksiyon.
+    /// - Parameters:
+    ///   - movie: Favorilere eklenecek film.
+    ///   - onSuccess: Favori ekleme işlemi başarılı olduğunda çağrılacak olan @escaping bloğu.
+    ///   - onError: Favori ekleme işlemi başarısız olduğunda çağrılacak olan @escaping bloğu.
     func addMovieToFavorite(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
-        
         let movieRef = currentUserRef
             .collection("favorites")
             .document(String(movie.id))
@@ -58,6 +63,7 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
+    /// Favorilerden film çıkarmayı sağlayan fonksiyon.
     func removeFromFavorites(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         let movieRef = currentUserRef
             .collection("favorites")
@@ -70,6 +76,7 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
+    /// Film favorilerde mi kontrolünü sağlayan fonksiyon.
     func isFavorited (movie: Movie, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
         let movieRef = currentUserRef
             .collection("favorites")
@@ -82,8 +89,26 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
+    /// Kullanıcının favori filmlerini getiren fonksiyon.
+    func getMoviesFromFavorites(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void) {
+        let favoritesRef = currentUserRef
+            .collection("favorites")
+        
+        FirestoreService.shared.getDocuments(reference: favoritesRef) { (favorites: [Movie]) in
+            onSuccess(favorites)
+        } onError: { error in
+            onError(error.localizedDescription)
+        }
+    }
+    
     
     //MARK: - WatchList Functions
+    
+    /// İzleme listesine film eklemeyi sağlayan fonksiyon.
+        /// - Parameters:
+        ///   - movie: İzleme listesine eklenecek film.
+        ///   - onSuccess: İzleme listesine ekleme işlemi başarılı olduğunda çağrılacak olan kapanış bloğu.
+        ///   - onError: İzleme listesine ekleme işlemi başarısız olduğunda çağrılacak olan kapanış bloğu.
     func addMovieToWatchList(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         
         let movieRef = currentUserRef
@@ -110,6 +135,7 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
+    /// İzleme listesinden film çıkarmayı sağlayan fonksiyon.
     func removeFromWatchList(movie: Movie, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         let movieRef = currentUserRef
             .collection("watchList")
@@ -122,6 +148,7 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
+    /// Film izleme listesinde mi kontrolünü sağlayan fonksiyon.
     func isWatchList (movie: Movie, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
         let movieRef = currentUserRef
             .collection("watchList")
@@ -134,9 +161,10 @@ final class FirestoreManager: FirestoreManagerInterface {
         }
     }
     
-    func getMoviesFromFavorites(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void) {
+    /// Kullanıcının İzleme Listesindeki filmlerini getiren fonksiyon.
+    func getMoviesFromWatchList(onSuccess: @escaping ([Movie]) -> Void, onError: @escaping (String) -> Void) {
         let favoritesRef = currentUserRef
-            .collection("favorites")
+            .collection("watchList")
         
         FirestoreService.shared.getDocuments(reference: favoritesRef) { (favorites: [Movie]) in
             onSuccess(favorites)
@@ -144,5 +172,4 @@ final class FirestoreManager: FirestoreManagerInterface {
             onError(error.localizedDescription)
         }
     }
-    
 }

@@ -16,9 +16,10 @@ protocol LoginViewProtocol: AnyObject {
 }
 
 final class LoginView: UIView {
-    weak var delegate: LoginViewProtocol?
     
     //MARK: - Properties
+    weak var delegate: LoginViewProtocol?
+  
     private lazy var loginImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "video.badge.waveform")

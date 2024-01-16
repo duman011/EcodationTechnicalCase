@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class DetailVC: UIViewController {
     
     //MARK: - Properties
     private lazy var viewModel = DetailViewModel()
     private let detailView = DetailView()
-    var movies: Movie? = nil
     private lazy var isFavorited = false
     private lazy var isWatchList = false
+    var movies: Movie? = nil
     
     
     //MARK: - Initializers
@@ -28,36 +29,41 @@ final class DetailVC: UIViewController {
     }
     
     //MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        detailView.delegate = self
+        configureUI()
+    }
+    
+    // MARK: - LoadView
     override func loadView() {
         super.loadView()
         view = detailView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        detailView.delegate = self
+    // MARK: - UI Configuration
+    private func configureUI() {
         updateUI()
         configureNavBar()
-        configureFavoriteButton()
+        configureFavoriteAndWatchListButton()
     }
     
-    // MARK: - UI Configuration
+    // MARK: - NavBar Configuration
     private func configureNavBar() {
         navigationItem.rightBarButtonItems = [detailView.favoriteButton,
                                               detailView.watchListButton]
     }
     
-    // MARK: - Data Update
+    // MARK: - Update UI with Movie Data
     private func updateUI() {
         
         if let imageURL = movies?.poster_path {
-            detailView.movieImage.downloadSetImage(url:"https://image.tmdb.org/t/p/w500/"+imageURL)
+            detailView.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/"+imageURL))
         }
         
         if let movieName = movies?.original_title {
             detailView.movieName.text = movieName
         }
-        
         
         if let movieRating = movies?.vote_average {
             let formattedValue = String(format: "%.1f", movieRating)
@@ -73,22 +79,26 @@ final class DetailVC: UIViewController {
         }
     }
     
-    private func configureFavoriteButton() {
-        // MARK: - isFavorite Button Configure
+    
+    // MARK: - Configure Favorite and WatchList Buttons
+    private func configureFavoriteAndWatchListButton() {
+      // Configure isFavorite button
         viewModel.isFavorited(movie: movies!) { bool in
              self.isFavorited = bool
             self.detailView.favoriteButton.image = UIImage(systemName: bool ? "suit.heart.fill" : "suit.heart")
          }
-        // MARK: - isWatchList Button Configure
+        // Configure isWatchList button
         viewModel.isWatchList(movie: movies!) { bool in
             self.isWatchList = bool
             self.detailView.watchListButton.image = UIImage(systemName: bool ? "text.badge.plus" : "text.badge.minus")
         }
      }
-    
 }
 
+// MARK: - DetailViewProtocol
 extension DetailVC: DetailViewProtocol {
+    
+    // MARK: - WatchList Button Tapped
     func watchListButtonTapped() {
         if isWatchList {
             viewModel.removeFromWatchList(movie: movies!) { bool in
@@ -103,6 +113,7 @@ extension DetailVC: DetailViewProtocol {
         }
     }
     
+    // MARK: - Favorites Button Tapped
     func favoritesButtonTapped() {
         if isFavorited {
             viewModel.removeFromFavorites(movie: movies!) { bool in

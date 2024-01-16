@@ -30,9 +30,7 @@ final class ForgotPasswordVC: UIViewController {
     private func configureNavBar() {
         view.backgroundColor = .systemBackground
         self.navigationItem.setHidesBackButton(true, animated: true)
-    }
-    
-    
+    }  
 }
 
 //MARK: - ForgotPasswordViewInterface

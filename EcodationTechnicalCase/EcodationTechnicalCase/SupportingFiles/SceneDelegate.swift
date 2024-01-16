@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -17,7 +18,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        // MARK: - kullanıcı sürekli giriş yapmamsı için yapılan işlem kullanıcıyı hatırlama işlemi
+        // MARK: - kullanıcı sürekli giriş yapmaması için yapılan işlem kullanıcıyı hatırlama işlemi
         if ApplicationVariables.currentUserID != nil {
             let tabBar = MainTabBarController()
             tabBar.modalPresentationStyle = .fullScreen 
@@ -28,11 +29,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         self.window?.makeKeyAndVisible()
-
+        
+        // MARK: - SDWebImage
+        print("------->>>>>> DEBUG: \(SDImageCache.shared.diskCache.totalSize())")
+        //20 MB'a tekabül eder
+        SDImageCache.shared.config.maxDiskSize = 1000000 * 20
     }
-    
-    
-    
     
 }
 

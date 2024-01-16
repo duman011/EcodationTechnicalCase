@@ -26,11 +26,13 @@ final class FavoritesVC: UIViewController {
         viewModel.viewDidLoad()
     }
     
+    // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.refreshUI()
     }
 
+    // MARK: - LoadView
     override func loadView() {
         super.loadView()
         view = favoriteView
@@ -95,6 +97,7 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
 }
 
 // MARK: - FavoritesVCInterface
+// FavoritesVCInterface protokolünü uygulayan metotlar.
 extension FavoritesVC: FavoritesVCInterface{
     func pushVC(vc: UIViewController) {
         DispatchQueue.main.async {
@@ -110,4 +113,6 @@ extension FavoritesVC: FavoritesVCInterface{
         configureNavbar()
         configureTableView()
     }
+    
+ 
 }

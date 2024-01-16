@@ -31,34 +31,33 @@ final class WatchListViewModel {
         self.firestoreManager = firestoreManager
     }
     
-    func fetchFavorites(completion: @escaping([Movie]) -> Void) {
-        firestoreManager.getMoviesFromFavorites {[weak self]
-            favoriteMovies in
-            guard let self else { return }
-            
-            completion(favoriteMovies)
+    /// Firestore'dan kullanıcının izlenecekler Listesindeki filmleri çeker.
+    func fetchWatchList(completion: @escaping([Movie]) -> Void) {
+        firestoreManager.getMoviesFromWatchList {watchListMovies in
+            completion(watchListMovies)
         } onError: { error in
             print(error)
         }
     }
     
-    func removeFromFavorites(movies: Movie) {
-            firestoreManager.removeFromFavorites(movie: movies) {[weak self] in
-                guard let self else { return }
-                
-             print("favorilerden çıkartılıyor...")
-            } onError: { error in
-                print(error)
-            }
+    /// İzleme listesinden bir filmi kaldırır.
+    func removeMovieFromWatchList(movies: Movie) {
+        firestoreManager.removeFromWatchList(movie: movies) {
+            print("WatchList'den çıkartılıyor...")
+        } onError: { error in
+            print(error)
+        }
     }
 }
 
 // MARK: - WatchListVMInterface
 extension WatchListViewModel: WatchListVMInterface{
+    /// İzleme listesindeki toplam film sayısını döndürür.
     func numberOfRowsInSection() -> Int {
         return movies.count
     }
     
+    /// Belirtilen indexPath için filmi döndürür.
     func cellForRow(at indexPath: IndexPath) -> Movie {
         let movie = movies[indexPath.row]
         return movie
@@ -66,23 +65,26 @@ extension WatchListViewModel: WatchListVMInterface{
     
     func deleteSwipeAction(at indexPath: IndexPath) {
         let movies = movies[indexPath.row]
-        removeFromFavorites(movies: movies)
+        removeMovieFromWatchList(movies: movies)
         refreshUI()
     }
     
+    /// Belirtilen indexPath'deki filmi seçtiğinde çağrılır ve film detaylarına gider.
     func didSelectRowAt(at indexPath: IndexPath) {
         let movie = movies[indexPath.row]
         let vc = DetailVC(movies: movie)
         view?.pushVC(vc: vc)
     }
     
+    /// View Controller yüklendiğinde çağrılır ve gerekli konfigürasyonları yapar.
     func viewDidLoad() {
         view?.configureViewDidLoad()
         refreshUI()
     }
     
+    // Filmleri güncelleyerek TableView'i yeniden yükler.
     func refreshUI() {
-        fetchFavorites { movies in
+        fetchWatchList { movies in
             self.movies = movies
             self.view?.tableViewReloadData()
         }

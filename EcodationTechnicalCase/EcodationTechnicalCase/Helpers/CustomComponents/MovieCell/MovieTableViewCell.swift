@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class MovieTableViewCell: UITableViewCell {
 
@@ -192,7 +193,7 @@ final class MovieTableViewCell: UITableViewCell {
     // MARK: - Public Methods
     func configure(with movies: Movie) { 
         if let imageURL = movies.poster_path {
-            titlesPosterUIImageView.downloadSetImage(url: "https://image.tmdb.org/t/p/w500/"+imageURL)
+            titlesPosterUIImageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(imageURL)"))
         }
         
         titleLabel.text = movies.original_title

@@ -9,11 +9,14 @@
 import Foundation
 import SystemConfiguration
 
+/// Cihazın ağ bağlantısını kontrol etmek için kullanılan sınıf.
 final class Reachability {
     static let shared = Reachability()
     
     private init() {}
     
+    /// Cihazın ağ bağlantısının olup olmadığını kontrol eden fonksiyon.
+    /// - Returns: Cihazın ağa bağlı olup olmadığını gösteren bool değer.
     static func isNetworkAvailable() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))

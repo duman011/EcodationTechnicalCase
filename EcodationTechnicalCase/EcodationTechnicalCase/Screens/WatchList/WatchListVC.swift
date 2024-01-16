@@ -11,6 +11,7 @@ protocol WatchListVCInterface: AnyObject{
     func configureViewDidLoad()
     func tableViewReloadData()
     func pushVC(vc: UIViewController)
+
 }
 
 final class WatchListVC: UIViewController {
@@ -27,11 +28,13 @@ final class WatchListVC: UIViewController {
         viewModel.viewDidLoad()
     }
     
+    // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.refreshUI()
     }
 
+    // MARK: - LoadView
     override func loadView() {
         super.loadView()
         view = watchListView
@@ -94,7 +97,8 @@ extension WatchListVC: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-// MARK: - FavoritesVCInterface
+// MARK: - WatchListVCInterface
+// WatchListVCInterface protokolünü uygulayan metotlar.
 extension WatchListVC: WatchListVCInterface{
     
     func pushVC(vc: UIViewController) {
@@ -111,4 +115,5 @@ extension WatchListVC: WatchListVCInterface{
         configureNavbar()
         configureTableView()
     }
+   
 }

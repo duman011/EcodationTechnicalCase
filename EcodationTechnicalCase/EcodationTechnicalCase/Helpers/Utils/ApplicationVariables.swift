@@ -13,6 +13,7 @@ struct ApplicationVariables {
     
     private init() {}
     
+    /// Kullanıcının UID'sini saklayan değişken.
     static var currentUserID: String?{
         get{
             return defaults.string(forKey: "currentUserID")
@@ -21,6 +22,7 @@ struct ApplicationVariables {
         }
     }
     
+    /// UserDefaults tutulan currentUserID temizler
     static func resetApplicationVariables(){
         defaults.removeObject(forKey: "currentUserID")
     }

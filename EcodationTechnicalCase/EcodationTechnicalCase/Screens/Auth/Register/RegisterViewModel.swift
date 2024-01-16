@@ -8,8 +8,10 @@
 import Foundation
 
 final class RegisterViewModel {
+    //MARK: - Properties
     private let  firebaseAuthManager: FirebaseAuthManagerProtocol
     
+    //MARK: - Initializers
     init(firebaseAuthManager: FirebaseAuthManagerProtocol = FirebaseAuthManager.shared) {
         self.firebaseAuthManager = firebaseAuthManager
     }
@@ -22,6 +24,5 @@ final class RegisterViewModel {
         } onError: { error in
             print(error)
         }
-
     }
 }

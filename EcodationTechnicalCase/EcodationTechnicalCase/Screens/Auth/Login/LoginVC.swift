@@ -31,7 +31,9 @@ final class LoginVC: UIViewController {
 }
 
 //MARK: - HomeViewInterface
+// LoginViewProtocol protokolünü uygulayan metotlar.
 extension LoginVC: LoginViewProtocol {
+    
     func forgotPasswordTapped() {
         let vc = ForgotPasswordVC()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -60,6 +62,7 @@ extension LoginVC: LoginViewProtocol {
         }
     }
     
+    // Google ile giriş butonuna tıkladığında çağrılan metot.
     func googleLoginTapped() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
@@ -73,14 +76,14 @@ extension LoginVC: LoginViewProtocol {
             
             guard let user = result?.user,
                   let idToken = user.idToken?.tokenString,
-                    let userName: String = user.profile?.name
+                    let email: String = user.profile?.email
             else {
                 return
             }
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
-            viewModel.signInGoogle(credential: credential,username: userName) {[weak self] in
+            viewModel.signInGoogle(credential: credential,email: email) {[weak self] in
                 guard let self else { return }
                 presentAlert(title: "Alert!", message: "Registration Successful 🥳", buttonTitle: "Ok")
                 let mainTabBar = MainTabBarController()

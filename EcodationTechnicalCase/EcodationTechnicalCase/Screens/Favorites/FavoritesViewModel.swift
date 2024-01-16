@@ -33,21 +33,16 @@ final class FavoritesViewModel {
     }
     
     func fetchFavorites(completion: @escaping([Movie]) -> Void) {
-        firestoreManager.getMoviesFromFavorites {[weak self]
-            favoriteMovies in
-            guard self != nil else { return }
-            
+        firestoreManager.getMoviesFromFavorites { favoriteMovies in
             completion(favoriteMovies)
         } onError: { error in
             print(error)
         }
     }
     
-    
+    /// Filmi Favoriden çıkarma işlemini gerçekleştiren metot.
     func removeFromFavorites(movies: Movie) {
-        firestoreManager.removeFromFavorites(movie: movies) {[weak self] in
-            guard self != nil else { return }
-            
+        firestoreManager.removeFromFavorites(movie: movies) {
          print("favorilerden çıkartılıyor...")
         } onError: { error in
             print(error)
@@ -56,33 +51,41 @@ final class FavoritesViewModel {
 }
 
 // MARK: - FavoritesVMInterface
+// FavoritesVMInterface protokolünü uygulayan metotlar.
 extension FavoritesViewModel: FavoritesVMInterface{
+    
+    /// Cell sayısını döndüren metot.
     func numberOfRowsInSection() -> Int {
         return movies.count
     }
     
+    /// Belirtilen indexPath'deki hücreyi döndüren metot.
     func cellForRow(at indexPath: IndexPath) -> Movie {
         let movie = movies[indexPath.row]
         return movie
     }
     
+    /// Belirtilen indexPath'deki hücreye yapılan kaydırma işlemi sonrasında tetiklenen metot.
     func deleteSwipeAction(at indexPath: IndexPath) {
         let movies = movies[indexPath.row]
         removeFromFavorites(movies: movies)
         refreshUI()
     }
     
+    /// Belirtilen indexPath'deki hücreye tıklanma olayını işleyen metot.
     func didSelectRowAt(at indexPath: IndexPath) {
         let movie = movies[indexPath.row]
         let vc = DetailVC(movies: movie)
         view?.pushVC(vc: vc)
     }
     
+    /// ViewDidLoad olayını işleyen metot.
     func viewDidLoad() {
         view?.configureViewDidLoad()
         refreshUI()
     }
     
+    /// Arayüzü yenileyen metot.
     func refreshUI() {
         fetchFavorites { movies in
             self.movies = movies

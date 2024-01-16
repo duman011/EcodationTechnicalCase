@@ -62,5 +62,4 @@ final class MainTabBarController : UITabBarController {
         
         return UINavigationController(rootViewController: favoritesVC)
     }
-    
 }

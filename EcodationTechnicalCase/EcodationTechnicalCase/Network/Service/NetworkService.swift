@@ -9,6 +9,10 @@ import Foundation
 
 
 protocol NetworkServiceInterface {
+    /// Belirtilen sorgu ile film arama API isteği yapar.
+      /// - Parameters:
+      ///   - query: Aranacak film adı veya kelime.
+      /// - Returns: Film yanıtını temsil eden bir `MovieResponse` nesnesi.
     func search(with query: String) async throws -> MovieResponse
 }
 
@@ -22,16 +26,29 @@ final class NetworkService: NetworkServiceInterface {
            self.manager = NetworkService.getSession()
     }
     
-    // MARK: Get Session
+    // MARK: - Get Session
+    /// URL Session örneği alır.
+    /// - Returns: Oluşturulan URLSession örneği.
     private static func getSession() -> URLSession {
            let configuration = URLSessionConfiguration.default
+        
+            // İsteklerin yanıtını beklemek için en fazla 20 saniye bekleyecek.
            configuration.timeoutIntervalForResource = 20
+        
+            // Bir isteğin tamamlanması için en fazla 20 saniye bekleyecek.
            configuration.timeoutIntervalForRequest = 20
+        
+           // Her iki önbelleği de yok sayacak şekilde yapılandırılıyor.
            configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
            return URLSession(configuration: configuration)
     }
     
-    // MARK: Default URL Component
+    // MARK: - Default URL Component
+    /// Temel URL bileşenini oluşturur.
+    /// - Parameters:
+    ///   - path: API yolunu temsil eden bir dize.
+    ///   - queries: API sorgu parametreleri.
+    /// - Returns: Oluşturulan URL bileşeni.
     private func getURLComponent(path: String = "/", queries: [String: String]) -> String {
         var urlComponents: URLComponents = URLComponents()
         urlComponents.scheme = Endpoint.searchMovie.urlScheme
@@ -47,6 +64,11 @@ final class NetworkService: NetworkServiceInterface {
     }
 
     
+    // MARK: - Search Movie
+    /// Belirtilen sorgu ile film arama API isteği yapar.
+    /// - Parameters:
+    ///   - query: Aranacak film adı veya kelime.
+    /// - Returns: Film yanıtını temsil eden bir `MovieResponse` nesnesi.
     func search(with query: String) async throws -> MovieResponse {
         guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
             throw MovieError.invalidUrl
@@ -59,7 +81,7 @@ final class NetworkService: NetworkServiceInterface {
         }
         
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await manager.data(from: url)
             
             guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode  else {
                 throw MovieError.invalidResponse

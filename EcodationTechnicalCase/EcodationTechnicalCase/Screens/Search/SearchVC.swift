@@ -8,7 +8,8 @@
 import UIKit
 
 protocol SearcVCInterface: AnyObject {
-    func configureViewDidload()
+    func configureNavigationBar()
+    func prepareSearchTableView()
     func searchTableViewReloadData()
     func pushVC(vc: UIViewController)
 }
@@ -46,13 +47,13 @@ final class SearchVC: UIViewController {
     
     // MARK: - UI Configuration
     /// Arayuzdeki degisiklikleri ayarlar.
-    private func prepareSearchTableView() {
+    internal func prepareSearchTableView() {
         searchView.searchTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         searchView.searchTableView.dataSource = self
         searchView.searchTableView.delegate = self
     }
     
-    private func configureNavigationBar() {
+    internal func configureNavigationBar() {
         navigationItem.title = "Movie Search"
         searchView.searchController.searchResultsUpdater = self
         navigationItem.searchController = searchView.searchController
@@ -104,11 +105,9 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
 }
 
 // MARK: - SearcVCInterface
+// SearcVCInterface protokolünü uygulayan metotlar.
 extension SearchVC: SearcVCInterface {
-    func configureViewDidload() {
-        configureNavigationBar()
-        prepareSearchTableView()
-    }
+  
     
     func searchTableViewReloadData() {
         DispatchQueue.main.async {
@@ -123,6 +122,7 @@ extension SearchVC: SearcVCInterface {
 
 
 // MARK: - SearchViewProtocol
+// SearchViewProtocol protokolünü uygulayan metot.
 extension SearchVC: SearchViewProtocol{
     func logoutButtonTapped() {
         viewModel.logout{

@@ -11,10 +11,7 @@ extension UIView{
     // MARK: - Adding Subviews
     func addSubviewsExt(_ views: UIView...) {
         for view in views { addSubview(view)}
-    }
-    
-    
-    
+    }  
 }
     
   

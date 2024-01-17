@@ -163,7 +163,7 @@ final class MovieTableViewCell: UITableViewCell {
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
-            titleStackView.leadingAnchor.constraint(equalTo: titlesPosterUIImageView.trailingAnchor),
+            titleStackView.leadingAnchor.constraint(equalTo: titlesPosterUIImageView.trailingAnchor, constant: 10),
             titleStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10)
         ])
 
@@ -179,7 +179,6 @@ final class MovieTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             dateStackView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             dateStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
-            dateStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15)
         ])
 
         // IMDB StackView Constraints

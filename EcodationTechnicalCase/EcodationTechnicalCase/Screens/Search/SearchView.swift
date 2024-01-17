@@ -26,6 +26,7 @@ final class SearchView: UIView {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
     

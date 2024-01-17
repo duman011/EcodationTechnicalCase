@@ -14,14 +14,11 @@ struct MockData {
        
         return EcodationTechnicalCase.Movie(id: 0,
                                             original_title: "",
-                                            original_name: "",
                                             overview: "",
                                             poster_path: "TestImage",
-                                            media_type: "",
+                                            backdrop_path: "TestImage",
                                             release_date: "",
-                                            first_air_date: "",
-                                            vote_average: 0.5,
-                                            vote_count: 1)
+                                            vote_average: 0.5)
     }()
     
     // MARK: - Mock MovieResponseovie

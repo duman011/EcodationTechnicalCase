@@ -57,7 +57,7 @@ final class DetailVC: UIViewController {
     // MARK: - Update UI with Movie Data
     private func updateUI() {
         
-        if let imageURL = movies?.poster_path {
+        if let imageURL = movies?.backdrop_path ?? movies?.poster_path{
             detailView.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/"+imageURL))
         }
         
@@ -91,7 +91,7 @@ final class DetailVC: UIViewController {
         // Configure isWatchList button
         viewModel.isWatchList(movie: movies!) { bool in
             self.isWatchList = bool
-            self.detailView.watchListButton.image = UIImage(systemName: bool ? "text.badge.plus" : "text.badge.minus")
+            self.detailView.watchListButton.image = UIImage(systemName: bool ? "text.badge.minus" : "text.badge.plus")
         }
      }
 }
@@ -104,12 +104,12 @@ extension DetailVC: DetailViewProtocol {
         if isWatchList {
             viewModel.removeFromWatchList(movie: movies!) { bool in
                 self.isWatchList = bool
-                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.minus")
+                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.plus")
             }
         } else {
             viewModel.addToWatchList(movie: movies!) { bool in
                 self.isWatchList = bool
-                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.plus")
+                self.detailView.watchListButton.image = UIImage(systemName: "text.badge.minus")
             }
         }
     }

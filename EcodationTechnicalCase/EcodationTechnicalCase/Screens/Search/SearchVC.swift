@@ -82,7 +82,7 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
+  
         // Kontrol ekleyerek index out of range hatasını önle
         guard indexPath.row < viewModel.movies.count  else {
             return cell
@@ -90,6 +90,8 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
         
         let movie = viewModel.movies[indexPath.row]
         cell.textLabel?.text = movie.original_title
+        
+        cell.backgroundColor = .secondarySystemBackground
         return cell
     }
     

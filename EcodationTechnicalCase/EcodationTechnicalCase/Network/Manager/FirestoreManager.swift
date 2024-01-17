@@ -46,14 +46,11 @@ final class FirestoreManager: FirestoreManagerInterface {
         let data: [String: Any] = [
             "id": movie.id,
             "original_title": movie.original_title ?? "",
-            "original_name": movie.original_name ?? "",
             "overview": movie.overview ?? "",
             "poster_path": movie.poster_path ?? "",
-            "media_type": movie.media_type ?? "",
+            "backdrop_path": movie.poster_path ?? "",
             "release_date": movie.release_date ?? "",
-            "first_air_date": movie.first_air_date ?? "",
             "vote_average": movie.vote_average ?? 0.0,
-            "vote_count": movie.vote_count ?? 0
         ]as [String : Any]
         
         FirestoreService.shared.setData(reference: movieRef, data: data) {
@@ -118,14 +115,11 @@ final class FirestoreManager: FirestoreManagerInterface {
         let data: [String: Any] = [
             "id": movie.id,
             "original_title": movie.original_title ?? "",
-            "original_name": movie.original_name ?? "",
             "overview": movie.overview ?? "",
             "poster_path": movie.poster_path ?? "",
-            "media_type": movie.media_type ?? "",
+            "backdrop_path": movie.poster_path ?? "",
             "release_date": movie.release_date ?? "",
-            "first_air_date": movie.first_air_date ?? "",
             "vote_average": movie.vote_average ?? 0.0,
-            "vote_count": movie.vote_count ?? 0
         ]as [String : Any]
         
         FirestoreService.shared.setData(reference: movieRef, data: data) {

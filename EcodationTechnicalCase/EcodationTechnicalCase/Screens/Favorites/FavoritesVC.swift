@@ -8,7 +8,8 @@
 import UIKit
 
 protocol FavoritesVCInterface: AnyObject{
-    func configureViewDidLoad()
+    func configureNavbar()
+    func prepareTableView()
     func tableViewReloadData()
     func pushVC(vc: UIViewController)
 }
@@ -36,18 +37,6 @@ final class FavoritesVC: UIViewController {
     override func loadView() {
         super.loadView()
         view = favoriteView
-    }
-
-    // MARK: - UI Configuration
-    private func configureNavbar() {
-        navigationItem.title = "Favorites List"
-        view.backgroundColor = .secondarySystemBackground
-    }
-    
-    private func configureTableView(){
-        favoriteView.tableView.delegate = self
-        favoriteView.tableView.dataSource = self
-        favoriteView.tableView.backgroundColor = .secondarySystemBackground
     }
 }
 
@@ -109,10 +98,15 @@ extension FavoritesVC: FavoritesVCInterface{
         favoriteView.tableView.reloadData()
     }
     
-    func configureViewDidLoad() {
-        configureNavbar()
-        configureTableView()
+ 
+    func configureNavbar() {
+        navigationItem.title = "Favorites List"
+        view.backgroundColor = .secondarySystemBackground
     }
     
- 
+    func prepareTableView(){
+        favoriteView.tableView.delegate = self
+        favoriteView.tableView.dataSource = self
+        favoriteView.tableView.backgroundColor = .secondarySystemBackground
+    }
 }

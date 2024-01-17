@@ -8,7 +8,8 @@
 import UIKit
 
 protocol WatchListVCInterface: AnyObject{
-    func configureViewDidLoad()
+    func configureNavbar()
+    func prepareTableView()
     func tableViewReloadData()
     func pushVC(vc: UIViewController)
 
@@ -38,18 +39,6 @@ final class WatchListVC: UIViewController {
     override func loadView() {
         super.loadView()
         view = watchListView
-    }
-
-    // MARK: - UI Configuration
-    private func configureNavbar() {
-        navigationItem.title = "Watch List"
-        view.backgroundColor = .secondarySystemBackground
-    }
-    
-    private func configureTableView(){
-        watchListView.tableView.delegate = self
-        watchListView.tableView.dataSource = self
-        watchListView.tableView.backgroundColor = .secondarySystemBackground
     }
 }
 
@@ -111,9 +100,15 @@ extension WatchListVC: WatchListVCInterface{
         watchListView.tableView.reloadData()
     }
     
-    func configureViewDidLoad() {
-        configureNavbar()
-        configureTableView()
+
+     func configureNavbar() {
+        navigationItem.title = "Watch List"
+        view.backgroundColor = .secondarySystemBackground
     }
-   
+    
+     func prepareTableView(){
+        watchListView.tableView.delegate = self
+        watchListView.tableView.dataSource = self
+        watchListView.tableView.backgroundColor = .secondarySystemBackground
+    }
 }

@@ -60,6 +60,11 @@
 		8395B1182B57185200BD3308 /* MockSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B1172B57185200BD3308 /* MockSearchVC.swift */; };
 		8395B11C2B571A0D00BD3308 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B11B2B571A0D00BD3308 /* MockNetworkService.swift */; };
 		8395B11E2B571C8B00BD3308 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B11D2B571C8B00BD3308 /* MockData.swift */; };
+		8395B1262B57CA1E00BD3308 /* FavoritesVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B1252B57CA1E00BD3308 /* FavoritesVMTest.swift */; };
+		8395B1282B57CA2900BD3308 /* MockFavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B1272B57CA2900BD3308 /* MockFavoritesVC.swift */; };
+		8395B12B2B57CC6800BD3308 /* MockFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B12A2B57CC6800BD3308 /* MockFirestoreManager.swift */; };
+		8395B12E2B57D6A700BD3308 /* WatchListVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B12D2B57D6A700BD3308 /* WatchListVMTest.swift */; };
+		8395B1302B57D6BF00BD3308 /* MockWatchListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B12F2B57D6BF00BD3308 /* MockWatchListVC.swift */; };
 		83FBC5DD2B5523760088C624 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DC2B5523760088C624 /* Movie.swift */; };
 		83FBC5E02B5524200088C624 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5DF2B5524200088C624 /* NetworkService.swift */; };
 		83FBC5E22B55245F0088C624 /* MovieError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBC5E12B55245F0088C624 /* MovieError.swift */; };
@@ -129,6 +134,11 @@
 		8395B1172B57185200BD3308 /* MockSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchVC.swift; sourceTree = "<group>"; };
 		8395B11B2B571A0D00BD3308 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		8395B11D2B571C8B00BD3308 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		8395B1252B57CA1E00BD3308 /* FavoritesVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVMTest.swift; sourceTree = "<group>"; };
+		8395B1272B57CA2900BD3308 /* MockFavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFavoritesVC.swift; sourceTree = "<group>"; };
+		8395B12A2B57CC6800BD3308 /* MockFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirestoreManager.swift; sourceTree = "<group>"; };
+		8395B12D2B57D6A700BD3308 /* WatchListVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListVMTest.swift; sourceTree = "<group>"; };
+		8395B12F2B57D6BF00BD3308 /* MockWatchListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWatchListVC.swift; sourceTree = "<group>"; };
 		83FBC5DC2B5523760088C624 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		83FBC5DF2B5524200088C624 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		83FBC5E12B55245F0088C624 /* MovieError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieError.swift; sourceTree = "<group>"; };
@@ -437,6 +447,8 @@
 			isa = PBXGroup;
 			children = (
 				8395B1132B5717E200BD3308 /* Search */,
+				8395B1242B57C9BE00BD3308 /* Favorites */,
+				8395B12C2B57D64300BD3308 /* WathList */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -454,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				8395B11A2B5719ED00BD3308 /* Service */,
+				8395B1292B57CC5400BD3308 /* Manager */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -465,6 +478,32 @@
 				8395B11D2B571C8B00BD3308 /* MockData.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		8395B1242B57C9BE00BD3308 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				8395B1252B57CA1E00BD3308 /* FavoritesVMTest.swift */,
+				8395B1272B57CA2900BD3308 /* MockFavoritesVC.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		8395B1292B57CC5400BD3308 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				8395B12A2B57CC6800BD3308 /* MockFirestoreManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		8395B12C2B57D64300BD3308 /* WathList */ = {
+			isa = PBXGroup;
+			children = (
+				8395B12D2B57D6A700BD3308 /* WatchListVMTest.swift */,
+				8395B12F2B57D6BF00BD3308 /* MockWatchListVC.swift */,
+			);
+			path = WathList;
 			sourceTree = "<group>";
 		};
 		83FBC5DE2B5523FD0088C624 /* Service */ = {
@@ -655,9 +694,14 @@
 			files = (
 				8395B11C2B571A0D00BD3308 /* MockNetworkService.swift in Sources */,
 				8395B1152B5717F500BD3308 /* SearchVMTests.swift in Sources */,
+				8395B1282B57CA2900BD3308 /* MockFavoritesVC.swift in Sources */,
+				8395B1262B57CA1E00BD3308 /* FavoritesVMTest.swift in Sources */,
 				8395B1182B57185200BD3308 /* MockSearchVC.swift in Sources */,
+				8395B12B2B57CC6800BD3308 /* MockFirestoreManager.swift in Sources */,
+				8395B1302B57D6BF00BD3308 /* MockWatchListVC.swift in Sources */,
 				8395B10C2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift in Sources */,
 				8395B11E2B571C8B00BD3308 /* MockData.swift in Sources */,
+				8395B12E2B57D6A700BD3308 /* WatchListVMTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

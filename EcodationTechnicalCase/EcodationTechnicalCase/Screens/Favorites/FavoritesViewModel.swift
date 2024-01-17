@@ -15,6 +15,7 @@ protocol FavoritesVMInterface {
     func cellForRow(at indexPath: IndexPath) -> Movie
     func didSelectRowAt(at indexPath: IndexPath)
     func deleteSwipeAction(at indexPath: IndexPath)
+    func removeFromFavorites(movies: Movie)
 }
 
 
@@ -22,8 +23,7 @@ final class FavoritesViewModel {
     //MARK: - Properties
     private weak var view: FavoritesVCInterface?
     private let firestoreManager: FirestoreManagerInterface
-    private let currentUserID = Auth.auth().currentUser!.uid
-    private var movies: [Movie] = []
+    var movies: [Movie] = []
     
     //MARK: - Initializers
     init(view: FavoritesVCInterface? = nil,
@@ -32,18 +32,9 @@ final class FavoritesViewModel {
         self.firestoreManager = firestoreManager
     }
     
-    func fetchFavorites(completion: @escaping([Movie]) -> Void) {
+    private func fetchFavorites(completion: @escaping([Movie]) -> Void) {
         firestoreManager.getMoviesFromFavorites { favoriteMovies in
             completion(favoriteMovies)
-        } onError: { error in
-            print(error)
-        }
-    }
-    
-    /// Filmi Favoriden çıkarma işlemini gerçekleştiren metot.
-    func removeFromFavorites(movies: Movie) {
-        firestoreManager.removeFromFavorites(movie: movies) {
-         print("favorilerden çıkartılıyor...")
         } onError: { error in
             print(error)
         }
@@ -81,7 +72,8 @@ extension FavoritesViewModel: FavoritesVMInterface{
     
     /// ViewDidLoad olayını işleyen metot.
     func viewDidLoad() {
-        view?.configureViewDidLoad()
+        view?.configureNavbar()
+        view?.prepareTableView()
         refreshUI()
     }
     
@@ -90,6 +82,15 @@ extension FavoritesViewModel: FavoritesVMInterface{
         fetchFavorites { movies in
             self.movies = movies
             self.view?.tableViewReloadData()
+        }
+    }
+    
+    /// Filmi Favoriden çıkarma işlemini gerçekleştiren metot.
+    func removeFromFavorites(movies: Movie) {
+        firestoreManager.removeFromFavorites(movie: movies) {
+         print("favorilerden çıkartılıyor...")
+        } onError: { error in
+            print(error)
         }
     }
 }

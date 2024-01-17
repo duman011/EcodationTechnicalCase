@@ -22,7 +22,7 @@ final class WatchListViewModel {
     //MARK: - Properties
     private weak var view: WatchListVCInterface?
     private let firestoreManager: FirestoreManagerInterface
-    private var movies: [Movie] = []
+    var movies: [Movie] = []
     
     //MARK: - Initializers
     init(view: WatchListVCInterface? = nil,
@@ -78,7 +78,8 @@ extension WatchListViewModel: WatchListVMInterface{
     
     /// View Controller yüklendiğinde çağrılır ve gerekli konfigürasyonları yapar.
     func viewDidLoad() {
-        view?.configureViewDidLoad()
+        view?.configureNavbar()
+        view?.prepareTableView()
         refreshUI()
     }
     

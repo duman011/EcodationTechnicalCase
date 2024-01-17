@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
+import FirebaseCore
 import FirebaseAuth
+import GoogleSignIn
 
 
 final class LoginVC: UIViewController {
@@ -27,7 +27,6 @@ final class LoginVC: UIViewController {
         super.loadView()
         view = loginView
     }
-    
 }
 
 //MARK: - HomeViewInterface

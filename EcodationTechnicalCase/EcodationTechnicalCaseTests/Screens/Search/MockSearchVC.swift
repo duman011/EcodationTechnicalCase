@@ -8,6 +8,7 @@
 @testable import EcodationTechnicalCase
 import UIKit
 
+// MockSearchVC, SearchVCInterface protokolünü uygulayan bir mock sınıftır ve bu sınıf, arayüzle ilgili metodları takip eder.
 final class MockSearchVC: SearcVCInterface {
     var invokedConfigureNavigationBar = false
     var invokedConfigureNavigationBarCount = 0
@@ -35,7 +36,9 @@ final class MockSearchVC: SearcVCInterface {
     
     var invokedPushVC = false
     var invokedPushVCCount = 0
+    
     var invokedPushVCParameters: (vc: UIViewController, Void)?
+    // pushVC fonksiyonunun çağrıldığı tüm seferleri takip eden bir liste.
     var invokedPushVCParametersList = [(vc: UIViewController, Void)]()
     
     func pushVC(vc: UIViewController) {

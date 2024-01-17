@@ -32,6 +32,7 @@ final class SearchVMTests: XCTestCase {
         super.tearDown()
     }
     
+    // Test senaryosu: viewDidLoad metodunun gerekli metodları çağırması
     func test_viewDidLoad_InvokesRequiredMethods() {
         //given
         XCTAssertEqual(view.invokedConfigureNavigationBarCount, 0)
@@ -45,18 +46,8 @@ final class SearchVMTests: XCTestCase {
         XCTAssertEqual(view.invokedPrepareSearchTableViewCount, 1)
     }
     
-    func test_updateSearchResults_InvokesRequiredMethods() {
-        //given
-
-     
-        //when
     
-        viewModel.updateSearchResults(searchText: "UnitTest")
-   
-        //then
-      
-    }
-    
+    // Test senaryosu: movieDidSelectItem metodunun gerekli metodları çağırması
     func test_movieDidSelectItem_InvokesRequiredMethods(){
         //given
         XCTAssertEqual(view.invokedPushVCCount, 0)
@@ -66,7 +57,8 @@ final class SearchVMTests: XCTestCase {
         viewModel.movies = [MockData.mockMovie]
         viewModel.movieDidSelectItem(at: IndexPath(row: 0, section: 0))
         
-        //then
+      
+        // Then: pushVC metodunun bir kez çağrıldığı ve parametre listesinin bir DetailVC içerdiği kontrol edilir
         XCTAssertEqual(view.invokedPushVCCount, 1)
         XCTAssertTrue(view.invokedPushVCParametersList.map(\.vc) is [DetailVC])
     }

@@ -15,7 +15,6 @@ final class AlertVC: UIViewController {
     private var message: String?
     private var buttonTitle: String?
     
-    
     //MARK: - UI Elements
     lazy var containerView  = AlertContainerView()
     lazy var titleLabel     = TitleLabel( fontSize: 20, textAlignment: .center,lineBreakMode: .byTruncatingTail)
@@ -85,7 +84,6 @@ final class AlertVC: UIViewController {
             messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12),
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
         ])
-
     }
     
     private func configureActionButton() {

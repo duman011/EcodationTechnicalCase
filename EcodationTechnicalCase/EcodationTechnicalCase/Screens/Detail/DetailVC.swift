@@ -87,6 +87,7 @@ final class DetailVC: UIViewController {
              self.isFavorited = bool
             self.detailView.favoriteButton.image = UIImage(systemName: bool ? "suit.heart.fill" : "suit.heart")
          }
+        
         // Configure isWatchList button
         viewModel.isWatchList(movie: movies!) { bool in
             self.isWatchList = bool

@@ -35,6 +35,5 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //20 MB'a tekabül eder
         SDImageCache.shared.config.maxDiskSize = 1000000 * 20
     }
-    
 }
 

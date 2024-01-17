@@ -94,5 +94,4 @@ final class FavoritesVMTest: XCTestCase {
         //then
         XCTAssertEqual(firestoreManager.invokedRemoveFromFavoritesCount, 1)
     }
-    
 }

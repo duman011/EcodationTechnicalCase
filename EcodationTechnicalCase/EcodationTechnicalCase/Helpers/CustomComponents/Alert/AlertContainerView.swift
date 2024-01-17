@@ -27,5 +27,4 @@ final class AlertContainerView: UIView {
        layer.borderColor = UIColor.white.cgColor
        translatesAutoresizingMaskIntoConstraints = false
     }
-    
 }

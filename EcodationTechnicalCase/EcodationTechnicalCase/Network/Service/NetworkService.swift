@@ -17,6 +17,7 @@ protocol NetworkServiceInterface {
 }
 
 final class NetworkService: NetworkServiceInterface {
+    //MARK: - Properties
     static let shared = NetworkService()
     private let decoder = JSONDecoder()
     private let manager: URLSession

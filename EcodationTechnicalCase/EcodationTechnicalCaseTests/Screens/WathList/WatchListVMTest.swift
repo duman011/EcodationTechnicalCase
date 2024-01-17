@@ -94,5 +94,4 @@ final class WatchListVMTest: XCTestCase {
         //then
         XCTAssertEqual(firestoreManager.invokedRemoveFromWatchListCount, 1)
     }
-    
 }

@@ -107,8 +107,6 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
 // MARK: - SearcVCInterface
 // SearcVCInterface protokolünü uygulayan metotlar.
 extension SearchVC: SearcVCInterface {
-  
-    
     func searchTableViewReloadData() {
         DispatchQueue.main.async {
             self.searchView.searchTableView.reloadData()

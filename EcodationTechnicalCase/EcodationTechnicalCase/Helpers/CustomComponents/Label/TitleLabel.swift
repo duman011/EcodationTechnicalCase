@@ -35,7 +35,6 @@ final class TitleLabel: UILabel {
         minimumScaleFactor = 0.9
         translatesAutoresizingMaskIntoConstraints = false
     }
-   
     
     private func fontWightToUIFontWeight(weight: FontWeight) -> UIFont.Weight {
         switch weight {

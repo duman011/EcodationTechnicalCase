@@ -12,7 +12,6 @@ protocol WatchListVCInterface: AnyObject{
     func prepareTableView()
     func tableViewReloadData()
     func pushVC(vc: UIViewController)
-
 }
 
 final class WatchListVC: UIViewController {
@@ -98,8 +97,7 @@ extension WatchListVC: WatchListVCInterface{
     
     func tableViewReloadData() {
         watchListView.tableView.reloadData()
-    }
-    
+    }    
 
      func configureNavbar() {
         navigationItem.title = "Watch List"

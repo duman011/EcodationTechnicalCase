@@ -44,5 +44,4 @@ final class MockWatchListVC: WatchListVCInterface {
         invokedPushVCParameters = (vc: vc, ())
         invokedPushVCParametersList.append((vc: vc, ()))
     }
-    
 }

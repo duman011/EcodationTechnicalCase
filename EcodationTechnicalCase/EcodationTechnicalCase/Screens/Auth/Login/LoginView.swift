@@ -238,8 +238,6 @@ final class LoginView: UIView {
         ])
     }
     
-  
-    
     //MARK: - @Actions
     @objc private func didTapForgotPassword() {
         delegate?.forgotPasswordTapped()

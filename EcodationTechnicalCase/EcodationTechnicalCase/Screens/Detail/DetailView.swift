@@ -27,7 +27,6 @@ final class DetailView: UIView {
         let label = UILabel()
         label.text = "movie Name"
         label.font = UIFont.systemFont(ofSize: 22,weight: .bold)
-    
         return label
     }()
     
@@ -91,6 +90,7 @@ final class DetailView: UIView {
     lazy var movieOverview: UITextView = {
         let textView = UITextView()
         textView.text = "test movie overview.."
+        textView.backgroundColor = .secondarySystemBackground
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.isEditable = false
         textView.isSelectable = false
@@ -119,6 +119,7 @@ final class DetailView: UIView {
     
     //MARK: - UI Configuration
     private func configureUI() {
+        backgroundColor = .secondarySystemBackground
         addSubviewsExt(movieImage, movieName, dateStackView, movieOverview)
         configureMovieImage()
         configureRatingStackView()

@@ -12,7 +12,7 @@ final class EmptyListView: UIView {
     //MARK: - Properties
    private lazy var emptyImage: UIImageView = {
         let imageView = UIImageView()
-       
+       imageView.tintColor = .label
         return imageView
     }()
     

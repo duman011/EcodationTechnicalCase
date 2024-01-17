@@ -72,7 +72,7 @@ final class DetailViewModel: DetailVMInterface {
     func addToWatchList(movie: Movie, completion: @escaping (Bool) -> Void) {
         firestoreManager.addMovieToWatchList(movie: movie) {[weak self] in
             guard let self else { return }
-            isFavorited(movie: movie) { bool in
+            isWatchList(movie: movie) { bool in
                 completion(bool)
             }
         } onError: { error in
@@ -84,7 +84,7 @@ final class DetailViewModel: DetailVMInterface {
     func removeFromWatchList(movie: Movie, completion: @escaping (Bool) -> Void) {
         firestoreManager.removeFromWatchList(movie: movie) {[weak self] in
             guard let self else { return }
-            isFavorited(movie: movie) { bool in
+            isWatchList(movie: movie) { bool in
                 completion(bool)
             }
         } onError: { error in

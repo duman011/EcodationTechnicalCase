@@ -103,7 +103,7 @@ extension DetailVC: DetailViewProtocol {
     func watchListButtonTapped() {
         if isWatchList {
             viewModel.removeFromWatchList(movie: movies!) { bool in
-                self.isFavorited = bool
+                self.isWatchList = bool
                 self.detailView.watchListButton.image = UIImage(systemName: "text.badge.minus")
             }
         } else {

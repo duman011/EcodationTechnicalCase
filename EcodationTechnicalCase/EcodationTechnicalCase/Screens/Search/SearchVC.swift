@@ -22,7 +22,6 @@ final class SearchVC: UIViewController {
     private let emptyView = EmptyListView(image:  UIImage(systemName: "movieclapper")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
                                           title: "No movies found for the given search text.")
     
-    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +56,7 @@ final class SearchVC: UIViewController {
         navigationItem.title = "Movie Search"
         searchView.searchController.searchResultsUpdater = self
         navigationItem.searchController = searchView.searchController
-        
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         navigationItem.rightBarButtonItems = [searchView.logoutButton]
     }
 }
@@ -68,7 +65,6 @@ final class SearchVC: UIViewController {
 extension SearchVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        
         viewModel.updateSearchResults(searchText: searchText)
     }
 }
@@ -81,7 +77,6 @@ extension SearchVC: UITableViewDataSource , UITableViewDelegate{
         }else {
             tableView.backgroundView = UIView()
         }
-
         return viewModel.movies.count
     }
     

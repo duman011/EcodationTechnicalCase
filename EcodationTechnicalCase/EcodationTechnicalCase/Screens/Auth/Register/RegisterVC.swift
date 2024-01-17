@@ -42,7 +42,7 @@ extension RegisterVC : RegisterViewProtocol {
         guard let email = registerView.emailTextField.text,
               let password = registerView.passwordTextField.text,
               let rePassword = registerView.rePasswordTextField.text else{
-             presentAlert(title: "Alert!", message: "Username, email, password, rePassword ?", buttonTitle: "Ok")
+             presentAlert(title: "Alert!", message: "Email, Password, rePassword ?", buttonTitle: "Ok")
              return
          }
          guard email.isValidEmail(email: email) else {
@@ -50,38 +50,36 @@ extension RegisterVC : RegisterViewProtocol {
              return
          }
          
+        guard password.count >= 6 else {
+            presentAlert(title: "Alert!", message: "Password must be at least 6 characters", buttonTitle: "Ok")
+            return
+        }
+        
+        guard password.containsDigits(password) else {
+            presentAlert(title: "Alert!", message: "Password must contain at least 1 digit", buttonTitle: "Ok")
+            return
+        }
+        
+        guard password.containsLowerCase(password) else {
+            presentAlert(title: "Alert!", message: "Password must contain at least 1 lowercase character", buttonTitle: "Ok")
+            return
+        }
+        
+        guard password.containsUpperCase(password) else {
+            presentAlert(title: "Alert!", message: "Password must contain at least 1 uppercase character", buttonTitle: "Ok")
+            return
+        }
+     
+        guard password == rePassword else {
+            presentAlert(title: "Alert!", message: "Password and password repeat are not the same", buttonTitle: "Ok")
+            return
+        }
+        
          guard password.isValidPassword(password: password) else {
-             presentAlert(title: "Alert!", message: "password Invalid", buttonTitle: "Ok")
+             presentAlert(title: "Alert!", message: "Password Invalid", buttonTitle: "Ok")
              return
          }
-        
-            
-            guard password.count >= 6 else {
-                presentAlert(title: "Alert!", message: "Password must be at least 6 characters", buttonTitle: "Ok")
-                return
-            }
-            
-            guard password.containsDigits(password) else {
-                presentAlert(title: "Alert!", message: "Password must contain at least 1 digit", buttonTitle: "Ok")
-                return
-            }
-            
-            guard password.containsLowerCase(password) else {
-                presentAlert(title: "Alert!", message: "Password must contain at least 1 lowercase character", buttonTitle: "Ok")
-                return
-            }
-            
-            guard password.containsUpperCase(password) else {
-                presentAlert(title: "Alert!", message: "Password must contain at least 1 uppercase character", buttonTitle: "Ok")
-                return
-            }
-         
-            guard password == rePassword else {
-                presentAlert(title: "Alert!", message: "Password and password repeat are not the same", buttonTitle: "Ok")
-                return
-            }
     
-        return
         
         /// Validation kontrolü yapıldıktan sonra isteninlen forma uygunsa kayıt yapılacak
          viewModel.register(email: email,

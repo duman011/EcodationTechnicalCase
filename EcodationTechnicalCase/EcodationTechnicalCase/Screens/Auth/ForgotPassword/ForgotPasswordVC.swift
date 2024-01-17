@@ -40,11 +40,13 @@ extension ForgotPasswordVC: ForgotPasswordViewProtocol {
         guard let email = forgotPasswordView.emailTextField.text else {
             return
         }
+        
        //Email Validation
         guard email.isValidEmail(email: email) else {
             presentAlert(title: "Alert!", message: "Invalide Email Address", buttonTitle: "Ok")
             return
         }
+        
         /// Validation kontrolü yapıldıktan sonra isteninlen forma uygunsa maile firebase aracılıgı ile kod gönderilecek yapılacak
         viewModel.resetPassword(email: email) { [weak self] success, message in
             guard let self else { return }

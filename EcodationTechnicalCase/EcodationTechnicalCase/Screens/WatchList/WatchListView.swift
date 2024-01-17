@@ -29,7 +29,6 @@ final class WatchListView: UIView {
     // MARK: - UI Configuration
     private func configureUI() {
         backgroundColor = .secondarySystemBackground
-        
         configureFavoriteTableView()
     }
     

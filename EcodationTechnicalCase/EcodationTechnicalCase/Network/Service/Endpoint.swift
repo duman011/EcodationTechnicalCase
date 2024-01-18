@@ -5,7 +5,6 @@
 //  Created by Yaşar Duman on 16.01.2024.
 //
 
-import Foundation
 
 enum Endpoint {
     case searchMovie

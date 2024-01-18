@@ -25,8 +25,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         // MARK: - SDWebImage
-        print("------->>>>>> DEBUG: \(SDImageCache.shared.diskCache.totalSize())")
-        //20 MB'a tekabül eder
+        print("------->>>>>> ImageCache TotalSize: \(SDImageCache.shared.diskCache.totalSize())")
+        //~19.06 MB tekabül eder
         SDImageCache.shared.config.maxDiskSize = 1000000 * 20
     }
 }

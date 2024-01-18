@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol NetworkServiceInterface {
     /// Belirtilen sorgu ile film arama API isteği yapar.
       /// - Parameters:

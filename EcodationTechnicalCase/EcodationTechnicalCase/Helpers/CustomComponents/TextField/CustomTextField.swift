@@ -10,7 +10,6 @@ import UIKit
 final class CustomTextField: UITextField {
     
     enum CustomTextFieldType {
-        case username
         case email
         case password
     }
@@ -57,9 +56,6 @@ final class CustomTextField: UITextField {
         
         
         switch fieldType {
-        case .username:
-            self.placeholder = "Username"
-            
         case .email:
             self.placeholder  = "Email address"
             self.keyboardType = .emailAddress

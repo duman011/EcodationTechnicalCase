@@ -74,15 +74,15 @@ extension LoginVC: LoginViewProtocol {
                 return
             }
             
-            guard let user = result?.user,
-                  let idToken = user.idToken?.tokenString,
-                    let email: String = user.profile?.email
+            guard let userEmail = result?.user,
+                  let idToken = userEmail.idToken?.tokenString,
+                    let email: String = userEmail.profile?.email
             else {
                 return
             }
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                           accessToken: user.accessToken.tokenString)
+                                                           accessToken: userEmail.accessToken.tokenString)
             viewModel.signInGoogle(credential: credential,email: email) {[weak self] in
                 guard let self else { return }
                 presentAlert(title: "Alert!", message: "Registration Successful 🥳", buttonTitle: "Ok")

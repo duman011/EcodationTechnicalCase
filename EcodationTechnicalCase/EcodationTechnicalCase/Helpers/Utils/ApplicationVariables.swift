@@ -26,5 +26,4 @@ struct ApplicationVariables {
     static func resetApplicationVariables(){
         defaults.removeObject(forKey: "currentUserID")
     }
-    
 }

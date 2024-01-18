@@ -19,7 +19,7 @@ final class ForgotPasswordView: UIView {
     
     private lazy var forgotPasswordImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "video.badge.waveform")
+        imageView.image = UIImage(systemName: "video.and.waveform.fill")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
         return imageView
@@ -130,11 +130,14 @@ final class ForgotPasswordView: UIView {
     
     private func configureImage() {
         forgotPasswordImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        let forgotImageHeightConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 80 : 120
+        
         NSLayoutConstraint.activate([
             forgotPasswordImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             forgotPasswordImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            forgotPasswordImage.heightAnchor.constraint(equalToConstant: 120),
-            forgotPasswordImage.widthAnchor.constraint(equalToConstant: 120)
+            forgotPasswordImage.heightAnchor.constraint(equalToConstant: forgotImageHeightConstant),
+            forgotPasswordImage.widthAnchor.constraint(equalToConstant: forgotImageHeightConstant)
         ])
     }
     
@@ -148,19 +151,23 @@ final class ForgotPasswordView: UIView {
     
     private func configureForgotPasswordLabel() {
         forgotPasswordLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let forgotLabelTopConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 10 : 50
+        
         NSLayoutConstraint.activate([
-            forgotPasswordLabel.topAnchor.constraint(equalTo: forgotPasswordTitle.bottomAnchor, constant: 50),
+            forgotPasswordLabel.topAnchor.constraint(equalTo: forgotPasswordTitle.bottomAnchor, constant: forgotLabelTopConstant),
             forgotPasswordLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
     private func configureTextField() {
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        let forgotTextFieldConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 30 : 40
+        
         NSLayoutConstraint.activate([
             emailTextField.topAnchor.constraint(equalTo: forgotPasswordLabel.bottomAnchor, constant: 10),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -10),
-            emailTextField.heightAnchor.constraint(equalToConstant: 40)
+            emailTextField.heightAnchor.constraint(equalToConstant: forgotTextFieldConstant)
         ])
     }
     

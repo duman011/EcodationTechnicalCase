@@ -19,8 +19,7 @@ final class FavoritesVC: UIViewController {
     //MARK: - Properties
     private let favoriteView = FavoritesView()
     private lazy var viewModel = FavoritesViewModel(view: self)
-    private lazy var emptyView = EmptyListView(image:  UIImage(systemName: "popcorn.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
-                                               title: "Your favorite movies list is currently empty")
+    private lazy var emptyView = EmptyListView(image:  UIImage(systemName: "heart.text.square"),title: "Your favorite movies list is currently empty")
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +71,10 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        
+        let favoriteTableViewHeight: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 120 : 150
+        
+        return favoriteTableViewHeight
     }
     
     // MARK: - Delete Swipe Action
@@ -100,7 +102,14 @@ extension FavoritesVC: FavoritesVCInterface{
     
  
     func configureNavbar() {
-        navigationItem.title = "Favorites List"
+        let titleLabel = UILabel()
+        titleLabel.text = "Favorites List"
+        
+        if let customFont = UIFont(name: "Agbalumo-Regular", size: 30) {
+            titleLabel.font = customFont
+            self.navigationItem.titleView = titleLabel
+            titleLabel.textColor = .label
+        }
         view.backgroundColor = .secondarySystemBackground
     }
     

@@ -20,7 +20,7 @@ final class RegisterView: UIView {
     
     private lazy var registerImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "video.badge.waveform")
+        imageView.image = UIImage(systemName: "video.and.waveform.fill")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
         return imageView
@@ -147,11 +147,14 @@ final class RegisterView: UIView {
     
     private func configureImage() {
         registerImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        let registerImageHeightConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 80 : 120
+        
         NSLayoutConstraint.activate([
             registerImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             registerImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            registerImage.heightAnchor.constraint(equalToConstant: 120),
-            registerImage.widthAnchor.constraint(equalToConstant: 120)
+            registerImage.heightAnchor.constraint(equalToConstant: registerImageHeightConstant),
+            registerImage.widthAnchor.constraint(equalToConstant: registerImageHeightConstant)
         ])
     }
     
@@ -164,20 +167,22 @@ final class RegisterView: UIView {
     }
     
     private func configureTextField() {
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        let registerTextFieldConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 30 : 40
+      
+        emailTextField.heightAnchor.constraint(equalToConstant: registerTextFieldConstant).isActive = true
+    
+        passwordTextField.heightAnchor.constraint(equalToConstant: registerTextFieldConstant).isActive = true
         
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        rePasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-        rePasswordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        rePasswordTextField.heightAnchor.constraint(equalToConstant: registerTextFieldConstant).isActive = true
     }
     
     private func configureLoginVStack() {
         registerVStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        let loginVStackTopConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 10 : 50
+        
         NSLayoutConstraint.activate([
-            registerVStack.topAnchor.constraint(equalTo: registerTitle.bottomAnchor, constant: 50),
+            registerVStack.topAnchor.constraint(equalTo: registerTitle.bottomAnchor, constant: loginVStackTopConstant),
             registerVStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             registerVStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])

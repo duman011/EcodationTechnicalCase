@@ -18,7 +18,6 @@ final class EmptyListView: UIView {
     
     private lazy var emptyTitle: UILabel = {
         let label = UILabel()
-    
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -49,6 +48,11 @@ final class EmptyListView: UIView {
     
     private func configureEmptyImage() {
         emptyImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        let emptyImageConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 90 : 130
+        
+        emptyImage.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: emptyImageConstant)
+        
         NSLayoutConstraint.activate([
             emptyImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             emptyImage.bottomAnchor.constraint(equalTo: centerYAnchor)
@@ -57,10 +61,15 @@ final class EmptyListView: UIView {
     
     private func configureEmptyTitle() {
         emptyTitle.translatesAutoresizingMaskIntoConstraints = false
+        
+        let emptyTitleConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 22 : 25
+        
+        emptyTitle.font = UIFont.systemFont(ofSize: emptyTitleConstant, weight: .bold)
+        
         NSLayoutConstraint.activate([
             emptyTitle.topAnchor.constraint(equalTo: emptyImage.bottomAnchor),
-            emptyTitle.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            emptyTitle.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 10)
+            emptyTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            emptyTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10)
         ])
     }
 }

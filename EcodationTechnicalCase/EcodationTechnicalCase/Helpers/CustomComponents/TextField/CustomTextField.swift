@@ -74,7 +74,7 @@ final class CustomTextField: UITextField {
             self.isSecureTextEntry = true
             
             rightButton.setImage(UIImage(systemName: "eye.slash.fill") , for: .normal)
-            rightButton.addTarget(self, action: #selector(toggleShowHide), for: .touchUpInside)
+            rightButton.addTarget(self, action: #selector(toggleShowHide), for: .touchUpInside)            
             rightButton.frame = CGRect(x:0, y:0, width:30, height:30)
              
             rightViewMode = .always

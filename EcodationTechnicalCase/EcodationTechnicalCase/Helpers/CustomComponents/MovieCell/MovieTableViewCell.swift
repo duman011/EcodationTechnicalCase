@@ -78,7 +78,6 @@ final class MovieTableViewCell: UITableViewCell {
    lazy var movieReleaseDate: UILabel = {
       let label = UILabel()
        label.text = "2023-09-13"
-       label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
        label.textColor = .secondaryLabel
        return label
    }()
@@ -161,17 +160,28 @@ final class MovieTableViewCell: UITableViewCell {
 
         // Title StackView Constraints
         titleStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let titleStackViewTopConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 18: 25
+        
         NSLayoutConstraint.activate([
-            titleStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
+            titleStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: titleStackViewTopConstant),
             titleStackView.leadingAnchor.constraint(equalTo: titlesPosterUIImageView.trailingAnchor, constant: 10),
             titleStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10)
         ])
+        
+        // Title Label Constraints
+        let titleLabelFont: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 15 : 16
+        
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabelFont, weight: .medium)
 
         // Play Title Button Constraints
         playTitleButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let playTitleButtonHeightConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 25 : 35
+        
         NSLayoutConstraint.activate([
-            playTitleButton.widthAnchor.constraint(equalToConstant: 35),
-            playTitleButton.heightAnchor.constraint(equalToConstant: 35)
+            playTitleButton.widthAnchor.constraint(equalToConstant: playTitleButtonHeightConstant),
+            playTitleButton.heightAnchor.constraint(equalToConstant: playTitleButtonHeightConstant)
         ])
 
         // Date StackView Constraints
@@ -180,9 +190,23 @@ final class MovieTableViewCell: UITableViewCell {
             dateStackView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             dateStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
         ])
+        
+        // Date Constraints
+        let movieReleaseDateFont: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 14 : 16
+        
+        movieReleaseDate.font = UIFont.systemFont(ofSize: movieReleaseDateFont, weight: .medium)
+        
+        releaseDateImage.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: movieReleaseDateFont)
 
         // IMDB StackView Constraints
         imdbStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let imdbLabelFont: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 14 : 16
+        
+        imdbLabel.font = UIFont.systemFont(ofSize: imdbLabelFont, weight: .medium)
+        
+        imdbImageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: imdbLabelFont)
+        
         NSLayoutConstraint.activate([
             imdbStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
             imdbStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10)

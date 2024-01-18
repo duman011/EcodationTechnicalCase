@@ -19,6 +19,7 @@ final class SearchView: UIView {
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController()
+        searchController.searchBar.placeholder = "Search an movie"
         return searchController
     }()
     

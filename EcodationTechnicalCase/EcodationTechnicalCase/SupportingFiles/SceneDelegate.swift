@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 
+
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -18,16 +19,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        // MARK: - kullanıcı sürekli giriş yapmaması için yapılan işlem kullanıcıyı hatırlama işlemi
-        if ApplicationVariables.currentUserID != nil {
-            let tabBar = MainTabBarController()
-            tabBar.modalPresentationStyle = .fullScreen 
-            window?.rootViewController = tabBar
-        }else {
-            let vc = UINavigationController(rootViewController: LoginVC())
-            window?.rootViewController = vc
-        }
-        
+        let vc = LauncScreenAnimation()
+        window?.rootViewController = vc
+ 
         self.window?.makeKeyAndVisible()
         
         // MARK: - SDWebImage

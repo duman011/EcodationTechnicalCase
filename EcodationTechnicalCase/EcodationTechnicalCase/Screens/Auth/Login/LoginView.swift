@@ -22,7 +22,7 @@ final class LoginView: UIView {
   
     private lazy var loginImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "video.badge.waveform")
+        imageView.image = UIImage(systemName: "video.and.waveform.fill")
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
         return imageView
@@ -34,6 +34,7 @@ final class LoginView: UIView {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 28)
         label.adjustsFontSizeToFitWidth = true // metni otomatik olarak küçült
+        label.lineBreakMode = .byTruncatingTail
         label.minimumScaleFactor = 0.7 // minimum küçültme faktörü
         return label
     }()
@@ -185,11 +186,14 @@ final class LoginView: UIView {
     
     private func configureImage() {
         loginImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        let loginImageHeightConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 80 : 120
+        
         NSLayoutConstraint.activate([
             loginImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             loginImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loginImage.heightAnchor.constraint(equalToConstant: 120),
-            loginImage.widthAnchor.constraint(equalToConstant: 120)
+            loginImage.heightAnchor.constraint(equalToConstant: loginImageHeightConstant),
+            loginImage.widthAnchor.constraint(equalToConstant: loginImageHeightConstant)
         ])
     }
     
@@ -202,17 +206,20 @@ final class LoginView: UIView {
     }
     
     private func configureTextField() {
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        let loginTextFieldConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 30 : 40
         
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        emailTextField.heightAnchor.constraint(equalToConstant: loginTextFieldConstant).isActive = true
+        
+        passwordTextField.heightAnchor.constraint(equalToConstant: loginTextFieldConstant).isActive = true
     }
     
     private func configureLoginVStack() {
         loginVStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        let loginVStackTopConstant: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 10 : 50
+    
         NSLayoutConstraint.activate([
-            loginVStack.topAnchor.constraint(equalTo: loginTitle.bottomAnchor, constant: 50),
+            loginVStack.topAnchor.constraint(equalTo: loginTitle.bottomAnchor, constant: loginVStackTopConstant),
             loginVStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             loginVStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])

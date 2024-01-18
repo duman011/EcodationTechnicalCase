@@ -19,8 +19,7 @@ final class SearchVC: UIViewController {
     //MARK: - Properties
     private lazy var viewModel = SearchViewModel(view: self)
     private let searchView = SearchView()
-    private let emptyView = EmptyListView(image:  UIImage(systemName: "movieclapper")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
-                                          title: "No movies found for the given search text.")
+    private let emptyView = EmptyListView(image:  UIImage(systemName: "doc.text.magnifyingglass"),title: "No movies found for the given search text.")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,14 +45,23 @@ final class SearchVC: UIViewController {
     
     // MARK: - UI Configuration
     /// Arayuzdeki degisiklikleri ayarlar.
-    internal func prepareSearchTableView() {
+     
+    func prepareSearchTableView() {
         searchView.searchTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         searchView.searchTableView.dataSource = self
         searchView.searchTableView.delegate = self
     }
     
-    internal func configureNavigationBar() {
-        navigationItem.title = "Movie Search"
+     func configureNavigationBar() {
+        let titleLabel = UILabel()
+        titleLabel.text = "Movie Search"
+        
+        if let customFont = UIFont(name: "Agbalumo-Regular", size: 30) {
+            titleLabel.font = customFont
+            self.navigationItem.titleView = titleLabel
+            titleLabel.textColor = .label
+        }
+        
         searchView.searchController.searchResultsUpdater = self
         navigationItem.searchController = searchView.searchController
         navigationItem.hidesSearchBarWhenScrolling = false

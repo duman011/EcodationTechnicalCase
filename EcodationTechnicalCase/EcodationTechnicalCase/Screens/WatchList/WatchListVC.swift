@@ -19,8 +19,7 @@ final class WatchListVC: UIViewController {
     //MARK: - Properties
     private let watchListView = WatchListView()
     private lazy var viewModel = WatchListViewModel(view: self)
-    private lazy var emptyView = EmptyListView(image:  UIImage(systemName: "list.and.film")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 130)),
-                                               title: "Your movie list is currently empty.")
+    private lazy var emptyView = EmptyListView(image:  UIImage(systemName: "list.and.film"),title: "Your movie list is currently empty.")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -73,7 +72,10 @@ extension WatchListVC: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        
+        let watchListTableViewHeight: CGFloat = DeviceTypes.is_iPhoneSE || DeviceTypes.is_iPhone8Zoomed ? 120 : 150
+        
+        return watchListTableViewHeight
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -100,7 +102,14 @@ extension WatchListVC: WatchListVCInterface{
     }    
 
      func configureNavbar() {
-        navigationItem.title = "Watch List"
+         let titleLabel = UILabel()
+         titleLabel.text = "Watch List"
+         
+         if let customFont = UIFont(name: "Agbalumo-Regular", size: 30) {
+             titleLabel.font = customFont
+             self.navigationItem.titleView = titleLabel
+             titleLabel.textColor = .label
+         }
         view.backgroundColor = .secondarySystemBackground
     }
     

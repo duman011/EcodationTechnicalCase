@@ -71,13 +71,8 @@ final class NetworkService: NetworkServiceInterface {
     ///   - query: Aranacak film adı veya kelime.
     /// - Returns: Film yanıtını temsil eden bir `MovieResponse` nesnesi.
     func search(with query: String) async throws -> MovieResponse {
-        
-        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed.union(CharacterSet(charactersIn: " "))) else {
-            throw MovieError.invalidUrl
-        }
-
-        
-        let queries = ["api_key": Endpoint.searchMovie.apiKey, "query": encodedQuery]
+  
+        let queries = ["api_key": Endpoint.searchMovie.apiKey, "query": query]
         
         guard let url = URL(string: getURLComponent(path: Endpoint.searchMovie.path, queries: queries)) else {
             throw MovieError.invalidUrl
@@ -95,5 +90,4 @@ final class NetworkService: NetworkServiceInterface {
             throw MovieError.invalidData
         }
     }
-
 }

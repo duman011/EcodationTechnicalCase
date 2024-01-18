@@ -41,6 +41,9 @@
 		833BBF832B51750E00066668 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF822B51750E00066668 /* LoginViewModel.swift */; };
 		833BBF852B51754800066668 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF842B51754800066668 /* LoginVC.swift */; };
 		833BBF892B517C4400066668 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BBF882B517C4400066668 /* CustomTextField.swift */; };
+		835D58A22B59532F0037804A /* LauncScreenAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D58A12B59532F0037804A /* LauncScreenAnimation.swift */; };
+		835D58A52B595EF10037804A /* DeviceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D58A42B595EF10037804A /* DeviceTypes.swift */; };
+		835D58A82B59964E0037804A /* Agbalumo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 835D58A72B5993920037804A /* Agbalumo-Regular.ttf */; };
 		8395B0DD2B55BEF200BD3308 /* WorkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0DC2B55BEF200BD3308 /* WorkItem.swift */; };
 		8395B0E02B55CE5D00BD3308 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0DF2B55CE5D00BD3308 /* ForgotPasswordViewModel.swift */; };
 		8395B0E32B55CF4E00BD3308 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0E22B55CF4E00BD3308 /* DetailViewModel.swift */; };
@@ -53,7 +56,6 @@
 		8395B0FA2B56A20300BD3308 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0F92B56A20300BD3308 /* FirestoreManager.swift */; };
 		8395B0FC2B56D18E00BD3308 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B0FB2B56D18E00BD3308 /* Reachability.swift */; };
 		8395B0FF2B570A2000BD3308 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8395B0FE2B570A2000BD3308 /* SDWebImage */; };
-		8395B10C2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B10B2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift */; };
 		8395B1152B5717F500BD3308 /* SearchVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B1142B5717F500BD3308 /* SearchVMTests.swift */; };
 		8395B1182B57185200BD3308 /* MockSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B1172B57185200BD3308 /* MockSearchVC.swift */; };
 		8395B11C2B571A0D00BD3308 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8395B11B2B571A0D00BD3308 /* MockNetworkService.swift */; };
@@ -115,6 +117,9 @@
 		833BBF822B51750E00066668 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		833BBF842B51754800066668 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		833BBF882B517C4400066668 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		835D58A12B59532F0037804A /* LauncScreenAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncScreenAnimation.swift; sourceTree = "<group>"; };
+		835D58A42B595EF10037804A /* DeviceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypes.swift; sourceTree = "<group>"; };
+		835D58A72B5993920037804A /* Agbalumo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Agbalumo-Regular.ttf"; sourceTree = "<group>"; };
 		8395B0DC2B55BEF200BD3308 /* WorkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkItem.swift; sourceTree = "<group>"; };
 		8395B0DF2B55CE5D00BD3308 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		8395B0E22B55CF4E00BD3308 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
@@ -127,7 +132,6 @@
 		8395B0F92B56A20300BD3308 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		8395B0FB2B56D18E00BD3308 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8395B1092B57177C00BD3308 /* EcodationTechnicalCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcodationTechnicalCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8395B10B2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcodationTechnicalCaseTests.swift; sourceTree = "<group>"; };
 		8395B1142B5717F500BD3308 /* SearchVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVMTests.swift; sourceTree = "<group>"; };
 		8395B1172B57185200BD3308 /* MockSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchVC.swift; sourceTree = "<group>"; };
 		8395B11B2B571A0D00BD3308 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				833142072B52875D0057EBC1 /* ApplicationVariables.swift */,
 				8395B0DC2B55BEF200BD3308 /* WorkItem.swift */,
 				8395B0FB2B56D18E00BD3308 /* Reachability.swift */,
+				835D58A42B595EF10037804A /* DeviceTypes.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -309,9 +314,10 @@
 		833BBF782B51705300066668 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				835D58A62B5993670037804A /* Font */,
 				833142062B52874A0057EBC1 /* Utils */,
-				833BBF862B517C1F00066668 /* CustomComponents */,
 				833BBF752B516FFD00066668 /* Extensions */,
+				833BBF862B517C1F00066668 /* CustomComponents */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 		833BBF792B51707400066668 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				835D58A02B59531A0037804A /* LaunchScreen */,
 				833142272B52FCDC0057EBC1 /* Tabbar */,
 				833BBF7B2B5170E400066668 /* Auth */,
 				833142332B5306650057EBC1 /* Search */,
@@ -393,6 +400,22 @@
 			path = TextField;
 			sourceTree = "<group>";
 		};
+		835D58A02B59531A0037804A /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				835D58A12B59532F0037804A /* LauncScreenAnimation.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		835D58A62B5993670037804A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				835D58A72B5993920037804A /* Agbalumo-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		8395B0E82B55E8EF00BD3308 /* EmptyListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,7 +457,6 @@
 			children = (
 				8395B1192B5719E500BD3308 /* Network */,
 				8395B1122B5717CD00BD3308 /* Screens */,
-				8395B10B2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift */,
 			);
 			path = EcodationTechnicalCaseTests;
 			sourceTree = "<group>";
@@ -617,6 +639,7 @@
 				833BBF6D2B516FF000066668 /* LaunchScreen.storyboard in Resources */,
 				833BBF6A2B516FF000066668 /* Assets.xcassets in Resources */,
 				8331423B2B54588D0057EBC1 /* GoogleService-Info.plist in Resources */,
+				835D58A82B59964E0037804A /* Agbalumo-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +660,7 @@
 				8331422F2B5301390057EBC1 /* WatchListVC.swift in Sources */,
 				833BBF892B517C4400066668 /* CustomTextField.swift in Sources */,
 				8395B0F32B55EB3B00BD3308 /* MovieTableViewCell.swift in Sources */,
+				835D58A52B595EF10037804A /* DeviceTypes.swift in Sources */,
 				8395B0F52B55FCA700BD3308 /* WatchListView.swift in Sources */,
 				833141F02B527CA10057EBC1 /* ForgotPasswordView.swift in Sources */,
 				833142292B52FCEC0057EBC1 /* MainTabBarController.swift in Sources */,
@@ -678,6 +702,7 @@
 				833142372B5307770057EBC1 /* SearchViewModel.swift in Sources */,
 				8395B0FC2B56D18E00BD3308 /* Reachability.swift in Sources */,
 				833142232B52F8760057EBC1 /* SecondaryTitleLabel.swift in Sources */,
+				835D58A22B59532F0037804A /* LauncScreenAnimation.swift in Sources */,
 				833BBF7F2B51747800066668 /* UIView+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,7 +718,6 @@
 				8395B1182B57185200BD3308 /* MockSearchVC.swift in Sources */,
 				8395B12B2B57CC6800BD3308 /* MockFirestoreManager.swift in Sources */,
 				8395B1302B57D6BF00BD3308 /* MockWatchListVC.swift in Sources */,
-				8395B10C2B57177C00BD3308 /* EcodationTechnicalCaseTests.swift in Sources */,
 				8395B11E2B571C8B00BD3308 /* MockData.swift in Sources */,
 				8395B12E2B57D6A700BD3308 /* WatchListVMTest.swift in Sources */,
 			);
@@ -854,6 +878,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -881,6 +906,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

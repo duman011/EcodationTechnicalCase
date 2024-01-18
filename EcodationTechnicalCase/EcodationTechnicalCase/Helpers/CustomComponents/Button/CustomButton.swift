@@ -38,6 +38,7 @@ final class CustomButton: UIButton {
     }
     
     //MARK: - Helper Functions
+
     private func set(bgColor: UIColor, color: UIColor, title: String, fontSize: Int, fontWeight: FontWeight, systemImageName: String?, pointSize: CGFloat? = 15, cornerStyle: UIButton.Configuration.CornerStyle?) {
         configuration?.baseBackgroundColor = bgColor
         configuration?.baseForegroundColor = color
